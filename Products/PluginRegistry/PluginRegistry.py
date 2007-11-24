@@ -202,8 +202,9 @@ class PluginRegistry( SimpleItem ):
                 raise IndexError, i1
 
             i2 = i1 - 1
-            if i2 < 0:      # wrap to bottom
-                i2 = len( ids ) - 1
+            if i2 < 0:
+                # i1 is already on top
+                continue
 
             ids[ i2 ], ids[ i1 ] = ids[ i1 ], ids[ i2 ]
 
@@ -227,8 +228,9 @@ class PluginRegistry( SimpleItem ):
                 raise IndexError, i1
 
             i2 = i1 + 1
-            if i2 == len( ids ):      # wrap to top
-                i2 = 0
+            if i2 == len( ids ):
+                # i1 is already on the bottom
+                continue
 
             ids[ i2 ], ids[ i1 ] = ids[ i1 ], ids[ i2 ]
 

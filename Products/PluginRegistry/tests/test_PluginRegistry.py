@@ -208,6 +208,19 @@ class PluginRegistryTests( unittest.TestCase ):
         self.assertEqual( idlist[1], 'baz_plugin' )
         self.assertEqual( idlist[2], 'foo_plugin' )
 
+        # Moving the top plugin up should not change anything.
+        preg.movePluginsUp( IFoo, ( 'bar_plugin', ) )
+        idlist = preg.listPluginIds( IFoo )
+        self.assertEqual(idlist, 
+                         ('bar_plugin', 'baz_plugin', 'foo_plugin'))
+
+        # Moving the top plugin and another one could change something.
+        preg.movePluginsUp( IFoo, ( 'bar_plugin', 'foo_plugin' ) )
+        idlist = preg.listPluginIds( IFoo )
+        self.assertEqual(idlist, 
+                         ('bar_plugin', 'foo_plugin', 'baz_plugin'))
+
+
     def test_movePluginsDown( self ):
 
         parent = DummyFolder()
@@ -240,6 +253,18 @@ class PluginRegistryTests( unittest.TestCase ):
         self.assertEqual( idlist[0], 'baz_plugin' )
         self.assertEqual( idlist[1], 'foo_plugin' )
         self.assertEqual( idlist[2], 'bar_plugin' )
+
+        # Moving the lowest plugin down should not change anything.
+        preg.movePluginsDown( IFoo, ( 'bar_plugin', ) )
+        idlist = preg.listPluginIds( IFoo )
+        self.assertEqual(idlist, 
+                         ('baz_plugin', 'foo_plugin', 'bar_plugin'))
+
+        # Moving the lowest plugin and another one could change something.
+        preg.movePluginsDown( IFoo, ( 'bar_plugin', 'baz_plugin' ) )
+        idlist = preg.listPluginIds( IFoo )
+        self.assertEqual(idlist, 
+                         ('foo_plugin', 'baz_plugin', 'bar_plugin'))
 
     def test_getAllPlugins( self ):
 
