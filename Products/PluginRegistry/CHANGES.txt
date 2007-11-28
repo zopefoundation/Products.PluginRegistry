@@ -1,6 +1,6 @@
 PluginRegistry Product Changelog
 
-  PluginRegistry 1.1.3 (unreleased)
+  PluginRegistry 1.1.3 (2007/11/28)
   
     - Fix bad behaviour when moving the top plugin up.
       (https://bugs.launchpad.net/bugs/164717)
