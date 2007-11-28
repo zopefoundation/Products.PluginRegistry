@@ -34,9 +34,7 @@ setup(name='Products.PluginRegistry',
         "Intended Audience :: Developers",
         "License :: OSI Approved :: Zope Public License",
         "Programming Language :: Python",
-        "Topic :: Software Development",
-        "Topic :: System :: Archiving :: Packaging",
-        "Topic :: System :: Software Development :: Libraries:: "
+        "Topic :: Software Development :: Libraries:: "
                 "Application Frameworks",
         ],
       keywords='web application server zope zope2',
