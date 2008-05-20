@@ -17,13 +17,8 @@ import unittest
 
 from Globals import package_home
 
-try:
-    from zope.interface import directlyProvides
-except ImportError:
-    def directlyProvides(obj, *interfaces):
-        obj.__implements__ = ( getattr( obj.__class__, '__implements__', () ) +
-                               tuple( interfaces )
-                             )
+from zope.interface import directlyProvides
+
 
 product_dir = package_home( globals() )
 product_prefix = os.path.join( os.path.split(product_dir)[:-1] )

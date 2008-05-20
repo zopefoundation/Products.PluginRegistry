@@ -1,6 +1,8 @@
 PluginRegistry Product Changelog
 
   PluginRegistry 1.2 (unreleased)
+
+    - Purge old zope2 Interface interfaces for Zope 2.12 compatibility.
   
     - Fix bad behaviour when moving the top plugin up.
       (https://bugs.launchpad.net/bugs/164717)

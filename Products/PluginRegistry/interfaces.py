@@ -16,13 +16,9 @@
 
 $Id$
 """
-try:
-    from zope.interface import Interface
-except:  # BBB?
-    from Interface import Interface
-    _HAS_Z3_INTERFACES = False
-else:
-    _HAS_Z3_INTERFACES = True
+
+from zope.interface import Interface
+_HAS_Z3_INTERFACES = True
 
 class IPluginRegistry( Interface ):
 

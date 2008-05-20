@@ -66,14 +66,7 @@ class PluginRegistry( SimpleItem ):
 
     o Each plugin type holds an ordered list of ( id, wrapper ) tuples.
     """
-    if _HAS_Z3_INTERFACES:
-        if _HAS_Z3_DAV_INTERFACES:
-            implements(IPluginRegistry, IWriteLock)
-        else:
-            implements(IPluginRegistry)
-            __implements__ = (WriteLockInterface,)
-    else:
-        __implements__ = (IPluginRegistry, WriteLockInterface,)
+    implements(IPluginRegistry, IWriteLock)
 
     security = ClassSecurityInfo()
 

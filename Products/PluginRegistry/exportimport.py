@@ -37,10 +37,7 @@ from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from interfaces import IPluginRegistry
 
 def _providedBy(obj, iface):
-    try:
-        return iface.providedBy(obj)
-    except AttributeError:
-        return iface.isImplementedBy(obj) # Z2 interfaces
+    return iface.providedBy(obj)
 
 _FILENAME = 'pluginregistry.xml'
 

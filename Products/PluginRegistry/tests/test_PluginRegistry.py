@@ -15,10 +15,8 @@
 import unittest
 from OFS.Folder import Folder
 
-try:
-    from zope.interface import Interface
-except ImportError:  # Zope < 2.8.0
-    from Interface import Interface
+
+from zope.interface import Interface
 
 from Acquisition import Implicit
 
@@ -62,10 +60,7 @@ class PluginRegistryTests( unittest.TestCase ):
         from Products.PluginRegistry.interfaces import IPluginRegistry
         from Products.PluginRegistry.interfaces import _HAS_Z3_INTERFACES
 
-        if _HAS_Z3_INTERFACES:
-            from zope.interface.verify import verifyClass
-        else:
-            from Interface.Verify import verifyClass
+        from zope.interface.verify import verifyClass
 
         verifyClass( IPluginRegistry, self._getTargetClass() )
 
