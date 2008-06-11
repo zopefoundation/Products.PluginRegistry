@@ -68,10 +68,17 @@ def exportPluginRegistry(context):
 def _updatePluginRegistry(registry, xml, should_purge, encoding=None):
 
     if should_purge:
-
         registry._plugin_types = []
         registry._plugin_type_info = PersistentMapping()
         registry._plugins = PersistentMapping()
+
+    # When PAS import is used in an extension profile, the plugin
+    # registry will have been deleted (content import deletes by
+    # default) but should_purge will be false; need to initialize
+    # _plugins since PluginRegistry's constructor doesn't
+    if registry._plugins is None:
+        registry._plugins = PersistentMapping()
+
 
     pir = PluginRegistryImporter(registry, encoding)
     reg_info = pir.parseXML(xml)

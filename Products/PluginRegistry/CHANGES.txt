@@ -7,6 +7,9 @@ PluginRegistry Product Changelog
     - Fix bad behaviour when moving the top plugin up.
       (https://bugs.launchpad.net/bugs/164717)
 
+    - Initialize plugin registry's _plugins attribute if necessary during
+      GenericSetup import
+
   PluginRegistry 1.1.2 (2007/04/24)
 
     - Drop previously-activated plugins from the list returned from
