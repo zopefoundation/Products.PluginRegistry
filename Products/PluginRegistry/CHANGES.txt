@@ -1,77 +1,99 @@
 PluginRegistry Product Changelog
+================================
 
-  PluginRegistry 1.2 (unreleased)
+PluginRegistry 1.2 (unreleased)
+-------------------------------
 
-    - Purge old zope2 Interface interfaces for Zope 2.12 compatibility.
-  
-    - Fix bad behaviour when moving the top plugin up.
-      (https://bugs.launchpad.net/bugs/164717)
+- Purge old zope2 Interface interfaces for Zope 2.12 compatibility.
 
-    - Initialize plugin registry's _plugins attribute if necessary during
-      GenericSetup import
+- Fix bad behaviour when moving the top plugin up.
+  (https://bugs.launchpad.net/bugs/164717)
 
-  PluginRegistry 1.1.2 (2007/04/24)
+- Initialize plugin registry's _plugins attribute if necessary during
+  GenericSetup import
 
-    - Drop previously-activated plugins from the list returned from
-      'listPlugins' when they no longer implement the plugin interface.
-      (http://www.zope.org/Collectors/PAS/53)
 
-    - Skip adding duplicate interfaces during non-purge import.
-      (http://www.zope.org/Collectors/PAS/52)
+PluginRegistry 1.1.3 (2007-11-28)
+---------------------------------
 
-    - Fixed test breakage on Zope 2.10.
+- Fix bad behaviour when moving the top plugin up.
+  (https://bugs.launchpad.net/bugs/164717)
 
-  PluginRegistry 1.1.1 (2006/07/25)
 
-    - Added workaround for autogen factories which assume they can
-      pass an ID to the registry's '__init__'.  In particular, this
-      allows the registry to be created and popluated as a "normal"
-      content object using GenericSetup.
+PluginRegistry 1.1.2 (2007-04-24)
+---------------------------------
 
-    - Improved BBB for testing under Zope 2.8.
+- Drop previously-activated plugins from the list returned from
+  'listPlugins' when they no longer implement the plugin interface.
+  (http://www.zope.org/Collectors/PAS/53)
 
-  PluginRegistry 1.1 (2006/02/25)
+- Skip adding duplicate interfaces during non-purge import.
+  (http://www.zope.org/Collectors/PAS/52)
 
-    - SVN tag:  svn+ssh://svn.zope.org/repos/main/PluginRegistry/tags/1.1
+- Fixed test breakage on Zope 2.10.
 
-    - Moved interfaces into a top-level module (no need for a package),
-      and made them forward-compatible with Z3 interfaces.
 
-    - Wired in DAV / FTP / ExternalEditor support for the registry,
-      along with a ZMI form for updating it as XML.
- 
-    - Added support for exporting / importing registry via GenericSetup.
+PluginRegistry 1.1.1 (2006-07-25)
+---------------------------------
 
-    - Moved from CVS to subversion (2005/10/14).
+- Added workaround for autogen factories which assume they can
+  pass an ID to the registry's '__init__'.  In particular, this
+  allows the registry to be created and popluated as a "normal"
+  content object using GenericSetup.
 
-    - Removed deprecation warings under Zope 2.8.x.
+- Improved BBB for testing under Zope 2.8.
 
-    - Repaired warings appearing in Zope 2.8.5 due to a couple typos
-      in security declarations.
 
-  PluginRegistry-1.0.2 (2005/01/31)
+PluginRegistry 1.1 (2006-02-25)
+-------------------------------
 
-    - SVN tag:  svn+ssh://svn.zope.org/repos/main/PluginRegistry/tags/1.0.2
+- SVN tag:  svn+ssh://svn.zope.org/repos/main/PluginRegistry/tags/1.1
 
-    - CVS tag:  PluginRegistry-1_0_2
+- Moved interfaces into a top-level module (no need for a package),
+  and made them forward-compatible with Z3 interfaces.
 
-    - Simplified package directory computation using 'package_home'.
+- Wired in DAV / FTP / ExternalEditor support for the registry,
+  along with a ZMI form for updating it as XML.
 
-    - Added 'test_suite' to registry tests to improve testability under
-      'zopectl test'.
+- Added support for exporting / importing registry via GenericSetup.
 
-  PluginRegistry-1.0.1 (2004/04/28)
+- Moved from CVS to subversion (2005-10-14).
 
-    - SVN tag:  svn+ssh://svn.zope.org/repos/main/PluginRegistry/tags/1.0.1
+- Removed deprecation warings under Zope 2.8.x.
 
-    - CVS tag:  PluginRegistry-1_0_1
+- Repaired warings appearing in Zope 2.8.5 due to a couple typos
+  in security declarations.
 
-    - Initial public release.
 
-  PluginRegistry-1.0 (2004/04/28)
+PluginRegistry-1.0.2 (2005-01-31)
+---------------------------------
 
-    - SVN tag:  svn+ssh://svn.zope.org/repos/main/PluginRegistry/tags/1.0
+- SVN tag:  svn+ssh://svn.zope.org/repos/main/PluginRegistry/tags/1.0.2
 
-    - CVS tag:  PluginRegistry-1_0
+- CVS tag:  PluginRegistry-1_0_2
 
-    - Vendor import from ZC repository.
+- Simplified package directory computation using 'package_home'.
+
+- Added 'test_suite' to registry tests to improve testability under
+  'zopectl test'.
+
+
+PluginRegistry-1.0.1 (2004-04-28)
+---------------------------------
+
+- SVN tag:  svn+ssh://svn.zope.org/repos/main/PluginRegistry/tags/1.0.1
+
+- CVS tag:  PluginRegistry-1_0_1
+
+- Initial public release.
+
+
+PluginRegistry-1.0 (2004-04-28)
+-------------------------------
+
+  - SVN tag:  svn+ssh://svn.zope.org/repos/main/PluginRegistry/tags/1.0
+
+  - CVS tag:  PluginRegistry-1_0
+
+  - Vendor import from ZC repository.
+
