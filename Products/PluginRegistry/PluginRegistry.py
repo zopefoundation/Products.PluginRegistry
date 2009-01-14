@@ -18,7 +18,7 @@ $Id$
 """
 import logging
 
-from Globals import Persistent
+from Persistence import Persistent
 from App.ImageFile import ImageFile
 from Acquisition import Implicit, aq_parent, aq_inner
 from AccessControl import ClassSecurityInfo

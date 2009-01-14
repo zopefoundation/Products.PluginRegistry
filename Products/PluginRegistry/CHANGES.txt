@@ -4,6 +4,8 @@ PluginRegistry Product Changelog
 PluginRegistry 1.2 (unreleased)
 -------------------------------
 
+- Fixed deprecation warnings for use of Globals.
+
 - Purge old zope2 Interface interfaces for Zope 2.12 compatibility.
 
 - Fix bad behaviour when moving the top plugin up.

@@ -15,7 +15,7 @@
 import os
 import unittest
 
-from Globals import package_home
+from App.Common import package_home
 
 from zope.interface import directlyProvides
 
