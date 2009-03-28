@@ -20,7 +20,7 @@
 
      <td class="form-text">
        <a href="?plugin_type=PTYPE"
-          tal:attributes="href string:?plugin_type=${info/id}"
+          tal:attributes="href string:manage_plugins?plugin_type=${info/id}"
           tal:content="string: ${info/title/title} Plugins"
        >PLUGIN TYPE DESCRIPTION</a>
      </td>
