@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+After 1.2
+---------
+
+- Require Zope >= 2.12.
+
+- Add a buildout for running tests.
+
+
 1.2 (2009-11-15)
 ----------------
 
