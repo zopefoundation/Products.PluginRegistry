@@ -12,15 +12,11 @@ def _package_doc(name):
 NAME = 'PluginRegistry'
 
 VERSION = _package_doc('version.txt').strip()
-if VERSION.startswith(NAME):
-    VERSION = VERSION[len(NAME):]
-while VERSION and VERSION[0] in '-_.':
-    VERSION = VERSION[1:]
 
-_boundary = '\n' + ('-' * 60) + '\n'
-README = ( _package_doc('README.txt')
-         + _boundary + _package_doc('CHANGES.txt')
-         + _boundary + "\nDownload\n========"
+_boundary = '\n\n'
+README = ( open('README.txt').read()
+         + _boundary
+         + open('CHANGES.txt').read()
          )
 
 setup(name='Products.PluginRegistry',
