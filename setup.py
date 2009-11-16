@@ -32,7 +32,7 @@ setup(name='Products.PluginRegistry',
         "Programming Language :: Python",
         "Topic :: Software Development",
         "Topic :: System :: Archiving :: Packaging",
-        "Topic :: System :: Software Development :: Libraries:: "
+        "Topic :: Software Development :: Libraries:: "
                 "Application Frameworks",
         ],
       keywords='web application server zope zope2',
