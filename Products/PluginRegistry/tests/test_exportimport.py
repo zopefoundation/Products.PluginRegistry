@@ -20,35 +20,22 @@ import unittest
 
 try:
     import Products.GenericSetup
-except ImportError:  # No GenericSetup, so no tests
-
-    print 'XXXX:  No GenericSetup!'
+except ImportError:
+    # No GenericSetup, so no tests
     def test_suite():
         return unittest.TestSuite()
-
 else:
     from Products.GenericSetup.tests.common import BaseRegistryTests
     from Products.GenericSetup.tests.common import DummyExportContext
     from Products.GenericSetup.tests.common import DummyImportContext
     from Products.GenericSetup.utils import _getDottedName
 
+    from zope.component import provideAdapter
+    from zope.component.testing import PlacelessSetup
     from zope.interface import Interface
     from zope.interface import directlyProvides
-    from zope.app.testing import ztapi
-
-    try:
-        from zope.traversing.interfaces import ITraversable
-        from zope.traversing.interfaces import TraversalError
-    except ImportError:
-        # BBB for Zope 2.9
-        from zope.app.traversing.interfaces import ITraversable
-        from zope.app.traversing.interfaces import TraversalError
-
-    try:
-        from zope.app.testing.placelesssetup import PlacelessSetup
-    except ImportError:
-        # BBB for Zope 2.8
-        from zope.app.tests.placelesssetup import PlacelessSetup
+    from zope.traversing.interfaces import ITraversable
+    from zope.traversing.interfaces import TraversalError
 
     class IFoo(Interface):
         pass
@@ -148,7 +135,7 @@ else:
             return PluginRegistryExporter
 
         def test_empty(self):
-            ztapi.provideAdapter(None, ITraversable, AttrItemTraverser)
+            provideAdapter(AttrItemTraverser, (Interface, ), ITraversable)
 
             app, registry = self._initRegistry()
             exporter = self._makeOne(registry).__of__(registry)
@@ -157,7 +144,7 @@ else:
             self._compareDOM(xml, _EMPTY_PLUGINREGISTRY_EXPORT)
 
         def test_normal_no_plugins(self):
-            ztapi.provideAdapter(None, ITraversable, AttrItemTraverser)
+            provideAdapter(AttrItemTraverser, (Interface, ), ITraversable)
 
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO)
@@ -167,7 +154,7 @@ else:
             self._compareDOM(xml, _NO_PLUGINS_PLUGINREGISTRY_EXPORT)
 
         def test_normal_with_plugins(self):
-            ztapi.provideAdapter(None, ITraversable, AttrItemTraverser)
+            provideAdapter(AttrItemTraverser, (Interface, ), ITraversable)
 
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO,
@@ -184,7 +171,7 @@ else:
         def test_empty(self):
             from Products.PluginRegistry.exportimport \
                 import exportPluginRegistry
-            ztapi.provideAdapter(None, ITraversable, AttrItemTraverser)
+            provideAdapter(AttrItemTraverser, (Interface, ), ITraversable)
 
             app, registry = self._initRegistry()
             context = DummyExportContext(app)
@@ -199,7 +186,7 @@ else:
         def test_normal_no_plugins(self):
             from Products.PluginRegistry.exportimport \
                 import exportPluginRegistry
-            ztapi.provideAdapter(None, ITraversable, AttrItemTraverser)
+            provideAdapter(AttrItemTraverser, (Interface, ), ITraversable)
 
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO)
@@ -215,7 +202,7 @@ else:
         def test_normal_with_plugins(self):
             from Products.PluginRegistry.exportimport \
                 import exportPluginRegistry
-            ztapi.provideAdapter(None, ITraversable, AttrItemTraverser)
+            provideAdapter(AttrItemTraverser, (Interface, ), ITraversable)
 
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO,
