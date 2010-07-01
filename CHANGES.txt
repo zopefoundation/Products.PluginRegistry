@@ -1,8 +1,10 @@
 Change Log
 ==========
 
-1.3a1 (unreleased)
+1.3b1 (2010-07-01)
 ------------------
+
+- Improved test coverage.
 
 - Removed dependency on ``zope.app.testing``.
 
