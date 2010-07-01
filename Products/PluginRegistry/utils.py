@@ -17,9 +17,6 @@ import unittest
 
 from App.Common import package_home
 
-from zope.interface import directlyProvides
-
-
 product_dir = package_home( globals() )
 product_prefix = os.path.join( os.path.split(product_dir)[:-1] )
 

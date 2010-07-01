@@ -18,7 +18,6 @@ $Id$
 """
 
 from zope.interface import Interface
-_HAS_Z3_INTERFACES = True
 
 class IPluginRegistry( Interface ):
 
