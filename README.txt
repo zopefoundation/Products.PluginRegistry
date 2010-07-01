@@ -1,8 +1,9 @@
 Products.PluginRegistry
 =======================
 
-Products.PluginRegistry offers a simple component registry with the ability
-to register components for specific interfaces and order them.
+Products.PluginRegistry offers a simple persistent registry which allows
+the site manager to registe components for specific interfaces, and
+to order them.
 
 Installation
 ------------
@@ -29,4 +30,3 @@ untar the package file downloaded from the PyPI site and look for
 the folder named "PluginRegistry" underneath the "Products" folder
 at the root of the extracted tarball. Copy or link this "PluginRegistry"
 folder into your Zope "Products" folder and restart Zope.
-
