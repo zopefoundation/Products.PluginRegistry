@@ -1,7 +1,6 @@
 ##############################################################################
 #
 # Copyright (c) 2001 Zope Foundation and Contributors
-# Reserved.
 #
 # This software is subject to the provisions of the Zope Public License,
 # Version 2.0 (ZPL).  A copy of the ZPL should accompany this
@@ -13,15 +12,11 @@
 #
 ##############################################################################
 """ PluginRegistry interface declarations
-
-$Id$
 """
 
 from zope.interface import Interface
 
-class IPluginRegistry( Interface ):
-
-
+class IPluginRegistry(Interface):
     """ Manage a set of plugin definitions, grouped by type.
     """
     def listPluginTypeInfo():
@@ -42,16 +37,16 @@ class IPluginRegistry( Interface ):
           'description' -- a description of what the plugins do
         """
 
-    def listPlugins( plugin_type ):
+    def listPlugins(plugin_type):
 
         """ Return a sequence of tuples, one for each plugin of the given type.
 
         o 'plugin_type' must be one of the known types, else raise KeyError.
 
-        o Tuples will be of the form, '( plugin_id, plugin )'.
+        o Tuples will be of the form, '(plugin_id, plugin)'.
         """
 
-    def listPluginIds( plugin_type ):
+    def listPluginIds(plugin_type):
 
         """ Return a sequence of plugin ids
         
@@ -60,7 +55,7 @@ class IPluginRegistry( Interface ):
         o 'plugin_type' must be one of the known types, else raise KeyError.
         """
 
-    def activatePlugin( plugin_type, plugin_id ):
+    def activatePlugin(plugin_type, plugin_id):
 
         """ Activate a plugin of the given type.
 
@@ -73,7 +68,7 @@ class IPluginRegistry( Interface ):
           'plugin_type'.
         """
 
-    def deactivatePlugin( plugin_type, plugin_id ):
+    def deactivatePlugin(plugin_type, plugin_id):
 
         """ Deactivate a plugin of the given type.
 
@@ -83,7 +78,7 @@ class IPluginRegistry( Interface ):
           else raise KeyError.
         """
 
-    def movePluginsUp( plugin_type, ids_to_move ):
+    def movePluginsUp(plugin_type, ids_to_move):
 
         """ Move a set of plugins "up" in their list.
 
@@ -95,7 +90,7 @@ class IPluginRegistry( Interface ):
           - If any item is not the ID of a current plugin, raise ValueError.
         """
 
-    def movePluginsDown( plugin_type, ids_to_move ):
+    def movePluginsDown(plugin_type, ids_to_move):
 
         """ Move a set of plugins "down" in their list.
 
