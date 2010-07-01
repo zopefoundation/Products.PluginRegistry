@@ -1,7 +1,6 @@
 ##############################################################################
 #
 # Copyright (c) 2001 Zope Foundation and Contributors
-# Reserved.
 #
 # This software is subject to the provisions of the Zope Public License,
 # Version 2.0 (ZPL).  A copy of the ZPL should accompany this
@@ -23,9 +22,9 @@ import PluginRegistry
 
 def initialize(context):
 
-    context.registerClass( PluginRegistry.PluginRegistry
-                         , constructors=[ ( 'Dummy', lambda: None ) ]
-                         , visibility=None
-                         , icon='www/PluginRegistry.png'
+    context.registerClass(PluginRegistry.PluginRegistry,
+                          constructors=[('Dummy', lambda: None)],
+                          visibility=None,
+                          icon='www/PluginRegistry.png',
                          )
 
