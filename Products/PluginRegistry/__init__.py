@@ -12,16 +12,10 @@
 #
 ##############################################################################
 """ PluginRegistry product initialization.
-
-$Id$
 """
 
-from utils import allTests
-
-import PluginRegistry
-
 def initialize(context):
-
+    import PluginRegistry
     context.registerClass(PluginRegistry.PluginRegistry,
                           constructors=[('Dummy', lambda: None)],
                           visibility=None,
