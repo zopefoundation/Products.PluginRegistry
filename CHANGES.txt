@@ -4,11 +4,11 @@ Change Log
 1.3a1 (unreleased)
 ------------------
 
-- No longer depend on zope.app.testing.
+- Removed dependency on ``zope.app.testing``.
 
-- Require Zope >= 2.12.
+- Dropped support for use with  Zope < 2.12.
 
-- Add a buildout for running tests.
+- Added a buildout for running tests.
 
 
 1.2 (2009-11-15)
@@ -20,31 +20,29 @@ Change Log
 
 - Fixed deprecation warnings for use of Globals.
 
-- Purge old zope2 Interface interfaces for Zope 2.12 compatibility.
+- Purged old zope2 Interface interfaces for Zope 2.12 compatibility.
 
-- Fix bad behaviour when moving the top plugin up.
-  (https://bugs.launchpad.net/bugs/164717)
-
-- Initialize plugin registry's _plugins attribute if necessary during
-  GenericSetup import
+- Updated GenericSetup import to Initialize plugin registry's ``_plugins``
+  attribute if necessary.
 
 
 1.1.3 (2007-11-28)
 ------------------
 
-- Fix bad behaviour when moving the top plugin up.
-  (https://bugs.launchpad.net/bugs/164717)
+- Fixed bad behaviour when moving the top plugin up.
+  https://bugs.launchpad.net/bugs/164717
 
 
 1.1.2 (2007-04-24)
 ------------------
 
-- Drop previously-activated plugins from the list returned from
-  'listPlugins' when they no longer implement the plugin interface.
-  (http://www.zope.org/Collectors/PAS/53)
+- Updated ``PluginRegistry.listPlugins`` to drop previously-activated
+  plugins when they no longer implement the plugin interface.
+  https://bugs.launchpad.net/zope-pas/+bug/161281
 
-- Skip adding duplicate interfaces during non-purge import.
-  (http://www.zope.org/Collectors/PAS/52)
+- Updated ``exportimport`` to skip adding duplicate interfaces during
+  non-purge imports.
+  https://bugs.launchpad.net/zope-pas/+bug/161280
 
 - Fixed test breakage on Zope 2.10.
 
@@ -53,7 +51,7 @@ Change Log
 ------------------
 
 - Added workaround for autogen factories which assume they can
-  pass an ID to the registry's '__init__'.  In particular, this
+  pass an ID to the registry's ``__init__``.  In particular, this
   allows the registry to be created and popluated as a "normal"
   content object using GenericSetup.
 
@@ -69,7 +67,7 @@ Change Log
 - Wired in DAV / FTP / ExternalEditor support for the registry,
   along with a ZMI form for updating it as XML.
 
-- Added support for exporting / importing registry via GenericSetup.
+- Added support for exporting / importing the registry via GenericSetup.
 
 - Moved from CVS to subversion (2005-10-14).
 
@@ -82,10 +80,10 @@ Change Log
 1.0.2 (2005-01-31)
 ------------------
 
-- Simplified package directory computation using 'package_home'.
+- Simplified package directory computation using ``package_home``.
 
-- Added 'test_suite' to registry tests to improve testability under
-  'zopectl test'.
+- Added ``test_suite`` to registry tests to improve testability under
+  ``zopectl test``.
 
 
 1.0.1 (2004-04-28)
