@@ -20,9 +20,9 @@ Change Log
 
 - Fixed deprecation warnings for use of Globals.
 
-- Purged old zope2 Interface interfaces for Zope 2.12 compatibility.
+- Purged old Zope2 interfaces for Zope 2.12 compatibility.
 
-- Updated GenericSetup import to Initialize plugin registry's ``_plugins``
+- Updated GenericSetup import to initialize plugin registry's ``_plugins``
   attribute if necessary.
 
 
