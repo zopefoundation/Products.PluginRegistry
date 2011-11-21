@@ -65,7 +65,7 @@ def exportPluginRegistry(context):
 
     return 'Plugin registry exported.'
 
-def _updatePluginRegistry(registry, xml, should_purge, encoding=None):
+def _updatePluginRegistry(registry, xml, should_purge, encoding='utf-8'):
 
     if should_purge:
         registry._plugin_types = []
@@ -112,7 +112,7 @@ def importPluginRegistry(context):
 
 class PluginRegistryExporter(ExportConfiguratorBase):
 
-    def __init__(self, context, encoding=None):
+    def __init__(self, context, encoding='utf-8'):
         ExportConfiguratorBase.__init__(self, None, encoding)
         self.context = context
 
@@ -128,7 +128,7 @@ class PluginRegistryExporter(ExportConfiguratorBase):
 
 class PluginRegistryImporter(ImportConfiguratorBase):
 
-    def __init__(self, context, encoding=None):
+    def __init__(self, context, encoding='utf-8'):
         ImportConfiguratorBase.__init__(self, None, encoding)
         self.context = context
 
