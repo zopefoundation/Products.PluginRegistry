@@ -68,7 +68,7 @@ class PluginRegistry(SimpleItem):
         self._plugin_types = [x[0] for x in plugin_type_info]
         self._plugin_type_info = PersistentMapping()
         for interface in plugin_type_info:
-            self._plugin_type_info[interface[0]] = { 
+            self._plugin_type_info[interface[0]] = {
                   'id': interface[1]
                 , 'title': interface[2]
                 , 'description': interface[3]
@@ -142,11 +142,11 @@ class PluginRegistry(SimpleItem):
             raise KeyError, 'Duplicate plugin id: %s' % plugin_id
 
         parent = aq_parent(aq_inner(self))
-        plugin = parent._getOb(plugin_id) 
+        plugin = parent._getOb(plugin_id)
 
         if not _satisfies(plugin, plugin_type):
-            raise ValueError, 'Plugin does not implement %s' % plugin_type 
-        
+            raise ValueError, 'Plugin does not implement %s' % plugin_type
+
         plugins.append(plugin_id)
         self._plugins[plugin_type] = tuple(plugins)
 

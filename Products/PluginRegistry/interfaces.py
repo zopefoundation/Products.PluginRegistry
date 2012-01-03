@@ -49,7 +49,7 @@ class IPluginRegistry(Interface):
     def listPluginIds(plugin_type):
 
         """ Return a sequence of plugin ids
-        
+
         o Return ids for each active plugin of the given type.
 
         o 'plugin_type' must be one of the known types, else raise KeyError.
@@ -86,7 +86,7 @@ class IPluginRegistry(Interface):
 
         o 'ids_to_move' must be a sequence of ids of current plugins
           for that type.
-          
+
           - If any item is not the ID of a current plugin, raise ValueError.
         """
 
@@ -98,6 +98,6 @@ class IPluginRegistry(Interface):
 
         o 'ids_to_move' must be a sequence of indexes of items in the current
           list of plugins for that type.
-          
+
           - If any item is not the ID of a current plugin, raise ValueError.
         """

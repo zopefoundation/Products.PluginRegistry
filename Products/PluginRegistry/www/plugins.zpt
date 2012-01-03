@@ -30,7 +30,7 @@
 <div tal:condition="plugin_type">
 <tal:info tal:define="plugin_info python:here.getPluginInfo( plugin_type )">
 
-<h3> <span tal:replace="plugin_info/title/capitalize">PluginType</span> 
+<h3> <span tal:replace="plugin_info/title/capitalize">PluginType</span>
     Plugins </h3>
 
 

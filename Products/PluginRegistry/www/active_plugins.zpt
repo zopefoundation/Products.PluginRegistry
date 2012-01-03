@@ -32,7 +32,7 @@
                tal:omit-tag="active_id">
            <a href=""
               tal:attributes="href string:../${active_id}/manage_workspace"
-              tal:content="string:${active_id}">foo_plugin</a> 
+              tal:content="string:${active_id}">foo_plugin</a>
          </span>
        </td>
 
@@ -42,7 +42,7 @@
                tal:omit-tag="inactive_id">
            <a href=""
               tal:attributes="href string:../${inactive_id}/manage_workspace"
-              tal:content="inactive_id">foo_plugin</a> 
+              tal:content="inactive_id">foo_plugin</a>
          </span>
        </td>
      </tal:plugins>
