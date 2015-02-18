@@ -13,16 +13,16 @@ NAME = 'PluginRegistry'
 
 VERSION = _package_doc('version.txt').strip()
 
-_boundary = '\n\n'
-README = ( open('README.txt').read()
-         + _boundary
-         + open('CHANGES.txt').read()
-         )
+with open('README.rst') as f:
+    README = f.read()
+
+with open('CHANGES.rst') as f:
+    CHANGES = f.read()
 
 setup(name='Products.PluginRegistry',
       version=VERSION,
       description='Configure application plugins based on interfaces',
-      long_description=README,
+      long_description=README + '\n\n' + CHANGES,
       classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Framework :: Plone",
