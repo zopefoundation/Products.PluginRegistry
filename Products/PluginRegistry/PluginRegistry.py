@@ -39,7 +39,7 @@ else:
     _HAS_GENERIC_SETUP = True
 
 product_dir = package_home(globals())
-product_prefix = os.path.join(os.path.split(product_dir)[:-1])
+product_prefix = os.path.split(product_dir)[0]
 
 _wwwdir = os.path.join( product_dir, 'www' )
 

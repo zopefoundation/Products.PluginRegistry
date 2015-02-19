@@ -4,6 +4,9 @@ Change Log
 1.4 (unreleased)
 ----------------
 
+- Fix usage of os.path.split(). Could result in Errors during import
+  on Windows.
+
 
 1.3 (2012-02-27)
 ----------------
