@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-1.4 (unreleased)
+1.4 (2016-03-01)
 ----------------
 
 - Fix usage of os.path.split(). Could result in Errors during import
