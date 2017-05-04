@@ -51,8 +51,8 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
-        'Zope2 >= 2.12',
-        'Products.GenericSetup'
+        'Zope2 >= 4.0a3',
+        'Products.GenericSetup >= 1.9.0'
         ],
     entry_points="""
     [zope2.initialize]
