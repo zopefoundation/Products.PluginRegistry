@@ -4,7 +4,7 @@ Change Log
 1.5 (unreleased)
 ----------------
 
-- TBD
+- Drop support for Python 2.6.
 
 1.4 (2016-03-01)
 ----------------
