@@ -26,7 +26,7 @@ from App.ImageFile import ImageFile
 from OFS.SimpleItem import SimpleItem
 from Persistence import PersistentMapping
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from webdav.interfaces import IWriteLock
+from OFS.interfaces import IWriteLock
 from zope.interface import implements
 
 from Products.PluginRegistry.interfaces import IPluginRegistry
