@@ -4,7 +4,11 @@ Change Log
 1.5 (unreleased)
 ----------------
 
+Breaking changes:
+
 - Drop support for Python 2.6.
+
+- Require Zope 4.0a3 as minimun supported Zope version.
 
 1.4 (2016-03-01)
 ----------------
