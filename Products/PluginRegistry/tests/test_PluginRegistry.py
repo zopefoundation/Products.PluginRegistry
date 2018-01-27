@@ -318,21 +318,21 @@ class PluginRegistryTests(unittest.TestCase):
         self.assertEqual(len(first['active']), 0)
 
         self.assertEqual(len(first['available']), 3)
-        self.failUnless('foo_plugin' in first['available'])
-        self.failUnless('bar_plugin' in first['available'])
-        self.failUnless('baz_plugin' in first['available'])
+        self.assertIn('foo_plugin', first['available'])
+        self.assertIn('bar_plugin', first['available'])
+        self.assertIn('baz_plugin', first['available'])
 
         preg.activatePlugin(IFoo, 'foo_plugin')
 
         second = preg.getAllPlugins('IFoo')
 
         self.assertEqual(len(second['active']), 1)
-        self.failUnless('foo_plugin' in second['active'])
+        self.assertIn('foo_plugin', second['active'])
 
         self.assertEqual(len(second['available']), 2)
-        self.failIf('foo_plugin' in second['available'])
-        self.failUnless('bar_plugin' in second['available'])
-        self.failUnless('baz_plugin' in second['available'])
+        self.assertNotIn('foo_plugin', second['available'])
+        self.assertIn('bar_plugin', second['available'])
+        self.assertIn('baz_plugin', second['available'])
 
         preg.activatePlugin(IFoo, 'bar_plugin')
         preg.activatePlugin(IFoo, 'baz_plugin')
@@ -340,9 +340,9 @@ class PluginRegistryTests(unittest.TestCase):
         third = preg.getAllPlugins('IFoo')
 
         self.assertEqual(len(third['active']), 3)
-        self.failUnless('foo_plugin' in third['active'])
-        self.failUnless('bar_plugin' in third['active'])
-        self.failUnless('baz_plugin' in third['active'])
+        self.assertIn('foo_plugin', third['active'])
+        self.assertIn('bar_plugin', third['active'])
+        self.assertIn('baz_plugin', third['active'])
 
         self.assertEqual(len(third['available']), 0)
 
