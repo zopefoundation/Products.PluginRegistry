@@ -20,7 +20,7 @@ from AccessControl import ClassSecurityInfo
 from AccessControl.Permissions import manage_users as ManageUsers
 from Acquisition import aq_parent
 from Acquisition import aq_inner
-from App.class_init import default__class_init__ as InitializeClass
+from AccessControl.class_init import default__class_init__ as InitializeClass
 from App.Common import package_home
 from App.ImageFile import ImageFile
 from OFS.SimpleItem import SimpleItem
