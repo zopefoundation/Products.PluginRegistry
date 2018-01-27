@@ -16,10 +16,9 @@
 
 $Id$
 """
-from StringIO import StringIO
 
 from Persistence import PersistentMapping
-from zope.interface import implements
+from zope.interface import implementer
 
 from Products.GenericSetup.interfaces import IFilesystemExporter
 from Products.GenericSetup.interfaces import IFilesystemImporter
@@ -33,8 +32,10 @@ from Products.GenericSetup.utils import CONVERTER
 from Products.GenericSetup.utils import DEFAULT
 from Products.GenericSetup.utils import KEY
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
+from six import StringIO
 
-from interfaces import IPluginRegistry
+from Products.PluginRegistry.interfaces import IPluginRegistry
+
 
 def _providedBy(obj, iface):
     return iface.providedBy(obj)
@@ -46,10 +47,10 @@ def _getRegistry(site):
                     if _providedBy(x, IPluginRegistry)]
 
     if len(registries) < 1:
-        raise ValueError, 'No plugin registries'
+        raise ValueError('No plugin registries')
 
     if len(registries) > 1:
-        raise ValueError, 'Too many plugin registries'
+        raise ValueError('Too many plugin registries')
 
     return registries[0]
 
@@ -150,10 +151,11 @@ class PluginRegistryImporter(ImportConfiguratorBase):
             },
          }
 
+
+@implementer(IFilesystemExporter, IFilesystemImporter)
 class PluginRegistryFileExportImportAdapter(object):
     """ Designed for ues when exporting / importing PR's within a container.
     """
-    implements(IFilesystemExporter, IFilesystemImporter)
 
     def __init__(self, context):
         self.context = context

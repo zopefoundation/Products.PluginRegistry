@@ -27,7 +27,8 @@ from OFS.SimpleItem import SimpleItem
 from Persistence import PersistentMapping
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from OFS.interfaces import IWriteLock
-from zope.interface import implements
+import six
+from zope.interface import implementer
 
 from Products.PluginRegistry.interfaces import IPluginRegistry
 
@@ -45,13 +46,14 @@ _wwwdir = os.path.join( product_dir, 'www' )
 
 logger = logging.getLogger('PluginRegistry')
 
+
+@implementer(IPluginRegistry, IWriteLock)
 class PluginRegistry(SimpleItem):
 
     """ Implement IPluginRegistry as an independent, ZMI-manageable object.
 
     o Each plugin type holds an ordered list of (id, wrapper) tuples.
     """
-    implements(IPluginRegistry, IWriteLock)
 
     security = ClassSecurityInfo()
 
@@ -61,7 +63,7 @@ class PluginRegistry(SimpleItem):
 
     def __init__(self, plugin_type_info=()):
 
-        if isinstance(plugin_type_info, basestring):
+        if isinstance(plugin_type_info, six.string_types):
             # some tool is passing us our ID.
             raise ValueError('Must pass a sequence of plugin info dicts!')
 
@@ -139,13 +141,14 @@ class PluginRegistry(SimpleItem):
         plugins = list(self._getPlugins(plugin_type))
 
         if plugin_id in plugins:
-            raise KeyError, 'Duplicate plugin id: %s' % plugin_id
+            raise KeyError('Duplicate plugin id: {0}'.format(plugin_id))
 
         parent = aq_parent(aq_inner(self))
         plugin = parent._getOb(plugin_id)
 
         if not _satisfies(plugin, plugin_type):
-            raise ValueError, 'Plugin does not implement %s' % plugin_type
+            raise ValueError(
+                'Plugin does not implement {0}'.format(plugin_type))
 
         plugins.append(plugin_id)
         self._plugins[plugin_type] = tuple(plugins)
@@ -158,7 +161,7 @@ class PluginRegistry(SimpleItem):
         plugins = list(self._getPlugins(plugin_type))
 
         if not plugin_id in plugins:
-            raise KeyError, 'Invalid plugin id: %s' % plugin_id
+            raise KeyError('Invalid plugin id: {0}'.format(plugin_id))
 
         plugins = [x for x in plugins if x != plugin_id]
         self._plugins[plugin_type] = tuple(plugins)
@@ -177,7 +180,7 @@ class PluginRegistry(SimpleItem):
         for i1 in indexes:
 
             if i1 < 0 or i1 >= count:
-                raise IndexError, i1
+                raise IndexError(i1)
 
             i2 = i1 - 1
             if i2 < 0:
@@ -203,7 +206,7 @@ class PluginRegistry(SimpleItem):
         for i1 in indexes:
 
             if i1 < 0 or i1 >= count:
-                raise IndexError, i1
+                raise IndexError(i1)
 
             i2 = i1 + 1
             if i2 == len(ids):
@@ -382,7 +385,7 @@ class PluginRegistry(SimpleItem):
         parent = aq_parent(aq_inner(self))
 
         if plugin_type not in self._plugin_types:
-            raise KeyError, plugin_type
+            raise KeyError(plugin_type)
 
         if self._plugins is None:
             self._plugins = PersistentMapping()
@@ -394,15 +397,15 @@ class PluginRegistry(SimpleItem):
 
         """ Convert the string name to an interface.
 
-        o Raise KeyError is no such interface is known.
+        o Raise KeyError if no such interface is known.
         """
         found = [x[0] for x in self._plugin_type_info.items()
                                 if x[1]['id'] == plugin_type_name]
         if not found:
-            raise KeyError, plugin_type_name
+            raise KeyError(plugin_type_name)
 
         if len(found) > 1:
-            raise KeyError, 'Waaa!:  %s' % plugin_type_name
+            raise KeyError('Waaa!:  {0}'.format(plugin_type_name))
 
         return found[0]
 

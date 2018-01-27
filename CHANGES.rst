@@ -4,7 +4,9 @@ Change Log
 1.6 (unreleased)
 ----------------
 
-- TBD
+- Added basic Python 3 compatibility.  Not complete yet:
+  it may need changes in GenericSetup.
+
 
 1.5 (2017-05-04)
 ----------------
