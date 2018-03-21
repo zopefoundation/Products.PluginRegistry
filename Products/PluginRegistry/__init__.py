@@ -15,7 +15,7 @@
 """
 
 def initialize(context):
-    import PluginRegistry
+    from . import PluginRegistry
     context.registerClass(PluginRegistry.PluginRegistry,
                           constructors=[('Dummy', lambda: None)],
                           visibility=None,
