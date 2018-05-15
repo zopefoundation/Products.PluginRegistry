@@ -29,7 +29,7 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Framework :: Plone",
         "Framework :: Plone :: 5.2",
-        "Framework :: Zope2",
+        "Framework :: Zope :: 4",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: Zope Public License",
         "Programming Language :: Python",
@@ -52,7 +52,7 @@ setup(
         'setuptools',
         'six',
         'Zope2 >= 4.0a3',
-        'Products.GenericSetup >= 1.9.0'
+        'Products.GenericSetup >= 2.0.dev0'
         ],
     entry_points="""
     [zope2.initialize]
