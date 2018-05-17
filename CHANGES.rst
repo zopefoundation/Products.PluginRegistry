@@ -4,8 +4,9 @@ Change Log
 1.6 (unreleased)
 ----------------
 
-- Added basic Python 3 compatibility.  Not complete yet:
-  it may need changes in GenericSetup.
+- Added Python 3.5 and 3.6 compatibility.
+
+- Require Zope 4.0b4 as minimum supported Zope version.
 
 
 1.5 (2017-05-04)
