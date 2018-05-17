@@ -17,8 +17,10 @@ import unittest
 from OFS.Folder import Folder
 from Acquisition import Implicit
 
+
 class DummyFolder(Folder):
     pass
+
 
 class DummyPlugin(Implicit):
     pass
@@ -52,8 +54,7 @@ class PluginRegistryTests(unittest.TestCase):
                 """ Bar. """
 
         _PLUGIN_INFO = ((IFoo, 'IFoo', 'foo', 'Foo test'),
-                        (IBar, 'IBar', 'bar', 'Bar test'),
-                       )
+                        (IBar, 'IBar', 'bar', 'Bar test'))
 
         return _PLUGIN_INFO, IFoo, IBar
 
@@ -118,7 +119,7 @@ class PluginRegistryTests(unittest.TestCase):
         preg = self._makeOne(plugin_info).__of__(parent)
 
         self.assertRaises(AttributeError, preg.activatePlugin, IFoo,
-                           'foo_plugin')
+                          'foo_plugin')
 
     def test_activatePluginInterface_non_conforming_interface(self):
         plugin_info, IFoo, IBar = self._makePluginInfo()
@@ -248,7 +249,6 @@ class PluginRegistryTests(unittest.TestCase):
         self.assertEqual(idlist,
                          ('bar_plugin', 'foo_plugin', 'baz_plugin'))
 
-
     def test_movePluginsDown(self):
         from zope.interface import directlyProvides
         plugin_info, IFoo, IBar = self._makePluginInfo()
@@ -271,8 +271,8 @@ class PluginRegistryTests(unittest.TestCase):
         preg.activatePlugin(IFoo, 'bar_plugin')
         preg.activatePlugin(IFoo, 'baz_plugin')
 
-        self.assertRaises(ValueError, preg.movePluginsDown
-                         , IFoo, ('quux_plugin',))
+        self.assertRaises(ValueError, preg.movePluginsDown,
+                          IFoo, ('quux_plugin',))
 
         preg.movePluginsDown(IFoo, ('foo_plugin', 'bar_plugin'))
 
@@ -378,6 +378,7 @@ class PluginRegistryTests(unittest.TestCase):
         idlist = preg.listPluginIds(IBar)
         self.assertEqual(len(idlist), 1)
         self.assertEqual(idlist[0], 'baz_plugin')
+
 
 def test_suite():
     return unittest.TestSuite((

@@ -10,6 +10,7 @@ def _package_doc(name):
     f = open(os.path.join(package, name))
     return f.read()
 
+
 NAME = 'PluginRegistry'
 
 VERSION = _package_doc('version.txt').strip()

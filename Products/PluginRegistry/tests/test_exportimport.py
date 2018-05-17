@@ -13,13 +13,11 @@
 #
 ##############################################################################
 """ Unit tests for GenericSetup-based export / import of PluginRegistry.
-
-$Id$
 """
 import unittest
 
 try:
-    import Products.GenericSetup
+    import Products.GenericSetup  # noqa
 except ImportError:
     # No GenericSetup, so no tests
     def test_suite():
@@ -50,17 +48,8 @@ else:
 """
 
     _PLUGIN_TYPE_INFO = (
-      ( IFoo
-      , 'IFoo'
-      , 'foo'
-      , "Some plugin interface"
-      )
-    , ( IBar
-      , 'IBar'
-      , 'bar'
-      , "Another plugin interface"
-      )
-    )
+      (IFoo, 'IFoo', 'foo', "Some plugin interface"),
+      (IBar, 'IBar', 'bar', "Another plugin interface"))
 
     _NO_PLUGINS_PLUGINREGISTRY_EXPORT = """\
 <?xml version="1.0"?>
@@ -115,7 +104,7 @@ else:
             app._setObject('foo_plugin_2', SimpleItem())
 
             registry = PluginRegistry(plugin_type_info)
-            registry._plugins = {} # it is usually lazy
+            registry._plugins = {}  # it is usually lazy
 
             for plugin_type, registered in plugins.items():
                 for obj_id in registered:
@@ -135,7 +124,7 @@ else:
             return PluginRegistryExporter
 
         def test_empty(self):
-            provideAdapter(AttrItemTraverser, (Interface, ), ITraversable)
+            provideAdapter(AttrItemTraverser, (Interface,), ITraversable)
 
             app, registry = self._initRegistry()
             exporter = self._makeOne(registry).__of__(registry)
@@ -144,7 +133,7 @@ else:
             self._compareDOM(xml, _EMPTY_PLUGINREGISTRY_EXPORT)
 
         def test_normal_no_plugins(self):
-            provideAdapter(AttrItemTraverser, (Interface, ), ITraversable)
+            provideAdapter(AttrItemTraverser, (Interface,), ITraversable)
 
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO)
@@ -154,13 +143,13 @@ else:
             self._compareDOM(xml, _NO_PLUGINS_PLUGINREGISTRY_EXPORT)
 
         def test_normal_with_plugins(self):
-            provideAdapter(AttrItemTraverser, (Interface, ), ITraversable)
+            provideAdapter(AttrItemTraverser, (Interface,), ITraversable)
 
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO,
                                     plugins={IFoo: ('foo_plugin_1',
                                                     'foo_plugin_2')},
-                                        )
+                                       )
             exporter = self._makeOne(registry).__of__(registry)
             xml = exporter.generateXML()
 
@@ -171,13 +160,13 @@ else:
         def test_empty(self):
             from Products.PluginRegistry.exportimport \
                 import exportPluginRegistry
-            provideAdapter(AttrItemTraverser, (Interface, ), ITraversable)
+            provideAdapter(AttrItemTraverser, (Interface,), ITraversable)
 
             app, registry = self._initRegistry()
             context = DummyExportContext(app)
             exportPluginRegistry(context)
 
-            self.assertEqual( len(context._wrote), 1 )
+            self.assertEqual(len(context._wrote), 1)
             filename, text, content_type = context._wrote[0]
             self.assertEqual(filename, 'pluginregistry.xml')
             self._compareDOM(text, _EMPTY_PLUGINREGISTRY_EXPORT)
@@ -186,14 +175,14 @@ else:
         def test_normal_no_plugins(self):
             from Products.PluginRegistry.exportimport \
                 import exportPluginRegistry
-            provideAdapter(AttrItemTraverser, (Interface, ), ITraversable)
+            provideAdapter(AttrItemTraverser, (Interface,), ITraversable)
 
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO)
             context = DummyExportContext(app)
             exportPluginRegistry(context)
 
-            self.assertEqual( len(context._wrote), 1 )
+            self.assertEqual(len(context._wrote), 1)
             filename, text, content_type = context._wrote[0]
             self.assertEqual(filename, 'pluginregistry.xml')
             self._compareDOM(text, _NO_PLUGINS_PLUGINREGISTRY_EXPORT)
@@ -202,17 +191,16 @@ else:
         def test_normal_with_plugins(self):
             from Products.PluginRegistry.exportimport \
                 import exportPluginRegistry
-            provideAdapter(AttrItemTraverser, (Interface, ), ITraversable)
+            provideAdapter(AttrItemTraverser, (Interface,), ITraversable)
 
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO,
                                     plugins={IFoo: ('foo_plugin_1',
-                                                    'foo_plugin_2')},
-                                        )
+                                                    'foo_plugin_2')})
             context = DummyExportContext(app)
             exportPluginRegistry(context)
 
-            self.assertEqual( len(context._wrote), 1 )
+            self.assertEqual(len(context._wrote), 1)
             filename, text, content_type = context._wrote[0]
             self.assertEqual(filename, 'pluginregistry.xml')
             self._compareDOM(text, _NORMAL_PLUGINREGISTRY_EXPORT)
@@ -231,7 +219,7 @@ else:
             importer = self._makeOne(registry).__of__(registry)
             reg_info = importer.parseXML(_EMPTY_PLUGINREGISTRY_EXPORT)
 
-            self.assertEqual( len( reg_info['plugin_types'] ), 0 )
+            self.assertEqual(len(reg_info['plugin_types']), 0)
 
         def test_parseXML_normal_no_plugins(self):
 
@@ -239,21 +227,21 @@ else:
             importer = self._makeOne(registry).__of__(registry)
             reg_info = importer.parseXML(_NO_PLUGINS_PLUGINREGISTRY_EXPORT)
 
-            self.assertEqual( len( reg_info['plugin_types'] ), 2 )
+            self.assertEqual(len(reg_info['plugin_types']), 2)
 
             info = reg_info['plugin_types'][0]
             self.assertEqual(info['id'], 'IFoo')
             self.assertEqual(info['interface'], _getDottedName(IFoo))
             self.assertEqual(info['title'], 'foo')
             self.assertEqual(info['description'], 'Some plugin interface')
-            self.assertEqual(len( info['plugins'] ), 0)
+            self.assertEqual(len(info['plugins']), 0)
 
             info = reg_info['plugin_types'][1]
             self.assertEqual(info['id'], 'IBar')
             self.assertEqual(info['interface'], _getDottedName(IBar))
             self.assertEqual(info['title'], 'bar')
             self.assertEqual(info['description'], 'Another plugin interface')
-            self.assertEqual(len( info['plugins'] ), 0 )
+            self.assertEqual(len(info['plugins']), 0)
 
         def test_parseXML_normal_with_plugins(self):
 
@@ -261,7 +249,7 @@ else:
             importer = self._makeOne(registry).__of__(registry)
             reg_info = importer.parseXML(_NORMAL_PLUGINREGISTRY_EXPORT)
 
-            self.assertEqual(len(reg_info['plugin_types'] ), 2 )
+            self.assertEqual(len(reg_info['plugin_types']), 2)
 
             info = reg_info['plugin_types'][0]
             self.assertEqual(info['id'], 'IFoo')
@@ -278,7 +266,7 @@ else:
             self.assertEqual(info['interface'], _getDottedName(IBar))
             self.assertEqual(info['title'], 'bar')
             self.assertEqual(info['description'], 'Another plugin interface')
-            self.assertEqual(len(info['plugins']), 0 )
+            self.assertEqual(len(info['plugins']), 0)
 
     class Test_importPluginRegistry(_TestBase):
 
@@ -289,8 +277,7 @@ else:
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO,
                                     plugins={IFoo: ('foo_plugin_1',
-                                                    'foo_plugin_2')},
-                                   )
+                                                    'foo_plugin_2')})
 
             self.assertEqual(len(registry.listPluginTypeInfo()), 2)
             self.assertEqual(len(registry.listPlugins(IFoo)), 2)
@@ -312,17 +299,16 @@ else:
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO,
                                     plugins={IFoo: ('foo_plugin_1',
-                                                    'foo_plugin_2')},
-                                   )
+                                                    'foo_plugin_2')})
 
             self.assertEqual(len(registry.listPluginTypeInfo()), 2)
             self.assertEqual(len(registry.listPlugins(IFoo)), 2)
             self.assertEqual(len(registry.listPlugins(IBar)), 0)
 
-            context = DummyImportContext(app, True)
-            context._files['pluginregistry.xml'] = _EMPTY_PLUGINREGISTRY_EXPORT
+            ctx = DummyImportContext(app, True)
+            ctx._files['pluginregistry.xml'] = _EMPTY_PLUGINREGISTRY_EXPORT
 
-            importPluginRegistry(context)
+            importPluginRegistry(ctx)
 
             self.assertEqual(len(registry.listPluginTypeInfo()), 0)
             self.assertRaises(KeyError, registry.listPlugins, IFoo)
@@ -335,17 +321,16 @@ else:
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO,
                                     plugins={IFoo: ('foo_plugin_1',
-                                                    'foo_plugin_2')},
-                                   )
+                                                    'foo_plugin_2')})
 
             self.assertEqual(len(registry.listPluginTypeInfo()), 2)
             self.assertEqual(len(registry.listPlugins(IFoo)), 2)
             self.assertEqual(len(registry.listPlugins(IBar)), 0)
 
-            context = DummyImportContext(app, False)
-            context._files['pluginregistry.xml'] = _EMPTY_PLUGINREGISTRY_EXPORT
+            ctx = DummyImportContext(app, False)
+            ctx._files['pluginregistry.xml'] = _EMPTY_PLUGINREGISTRY_EXPORT
 
-            importPluginRegistry(context)
+            importPluginRegistry(ctx)
 
             self.assertEqual(len(registry.listPluginTypeInfo()), 2)
             self.assertEqual(len(registry.listPlugins(IFoo)), 2)
@@ -355,19 +340,18 @@ else:
             from Products.PluginRegistry.exportimport \
                 import importPluginRegistry
 
-            app, registry = self._initRegistry(plugins={IFoo: ('foo_plugin_1',
-                                                               'foo_plugin_2')},
-                                              )
+            app, registry = self._initRegistry(
+                              plugins={IFoo: ('foo_plugin_1', 'foo_plugin_2')})
 
             self.assertEqual(len(registry.listPluginTypeInfo()), 0)
             self.assertRaises(KeyError, registry.listPlugins, IFoo)
             self.assertRaises(KeyError, registry.listPlugins, IBar)
 
-            context = DummyImportContext(app, False)
-            context._files['pluginregistry.xml'
-                          ] = _NO_PLUGINS_PLUGINREGISTRY_EXPORT
+            ctx = DummyImportContext(app, False)
+            xml_data = _NO_PLUGINS_PLUGINREGISTRY_EXPORT
+            ctx._files['pluginregistry.xml'] = xml_data
 
-            importPluginRegistry(context)
+            importPluginRegistry(ctx)
 
             self.assertEqual(len(registry.listPluginTypeInfo()), 2)
 
@@ -388,19 +372,17 @@ else:
             from Products.PluginRegistry.exportimport \
                 import importPluginRegistry
 
-            app, registry = self._initRegistry(plugins={IFoo: ('foo_plugin_1',
-                                                               'foo_plugin_2')},
-                                              )
+            app, registry = self._initRegistry(
+                              plugins={IFoo: ('foo_plugin_1', 'foo_plugin_2')})
 
             self.assertEqual(len(registry.listPluginTypeInfo()), 0)
             self.assertRaises(KeyError, registry.listPlugins, IFoo)
             self.assertRaises(KeyError, registry.listPlugins, IBar)
 
-            context = DummyImportContext(app, False)
-            context._files['pluginregistry.xml'
-                          ] = _NORMAL_PLUGINREGISTRY_EXPORT
+            ctx = DummyImportContext(app, False)
+            ctx._files['pluginregistry.xml'] = _NORMAL_PLUGINREGISTRY_EXPORT
 
-            importPluginRegistry(context)
+            importPluginRegistry(ctx)
 
             self.assertEqual(len(registry.listPluginTypeInfo()), 2)
 
@@ -434,12 +416,11 @@ else:
             self.assertRaises(KeyError, registry.listPlugins, IFoo)
             self.assertRaises(KeyError, registry.listPlugins, IBar)
 
-            context = DummyImportContext(app, False)
-            context._files['pluginregistry.xml'
-                          ] = _NORMAL_PLUGINREGISTRY_EXPORT
+            ctx = DummyImportContext(app, False)
+            ctx._files['pluginregistry.xml'] = _NORMAL_PLUGINREGISTRY_EXPORT
 
-            importPluginRegistry(context)
-            importPluginRegistry(context) # twice should not duplicate
+            importPluginRegistry(ctx)
+            importPluginRegistry(ctx)  # twice should not duplicate
 
             self.assertEqual(len(registry.listPluginTypeInfo()), 2)
 
@@ -462,12 +443,10 @@ else:
 
     def test_suite():
         return unittest.TestSuite((
-            unittest.makeSuite( PluginRegistryExporterTests ),
-            unittest.makeSuite( PluginRegistryImporterTests ),
-            unittest.makeSuite( Test_exportPluginRegistry ),
-            unittest.makeSuite( Test_importPluginRegistry ),
-           ))
+            unittest.makeSuite(PluginRegistryExporterTests),
+            unittest.makeSuite(PluginRegistryImporterTests),
+            unittest.makeSuite(Test_exportPluginRegistry),
+            unittest.makeSuite(Test_importPluginRegistry)))
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')
-

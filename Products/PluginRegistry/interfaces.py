@@ -16,6 +16,7 @@
 
 from zope.interface import Interface
 
+
 class IPluginRegistry(Interface):
     """ Manage a set of plugin definitions, grouped by type.
     """

@@ -14,11 +14,10 @@
 """ PluginRegistry product initialization.
 """
 
+
 def initialize(context):
     from . import PluginRegistry
     context.registerClass(PluginRegistry.PluginRegistry,
                           constructors=[('Dummy', lambda: None)],
                           visibility=None,
-                          icon='www/PluginRegistry.png',
-                         )
-
+                          icon='www/PluginRegistry.png')

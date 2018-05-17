@@ -42,7 +42,7 @@ else:
 product_dir = package_home(globals())
 product_prefix = os.path.split(product_dir)[0]
 
-_wwwdir = os.path.join( product_dir, 'www' )
+_wwwdir = os.path.join(product_dir, 'www')
 
 logger = logging.getLogger('PluginRegistry')
 
@@ -56,9 +56,7 @@ class PluginRegistry(SimpleItem):
     """
 
     security = ClassSecurityInfo()
-
     meta_type = 'Plugin Registry'
-
     _plugins = None
 
     def __init__(self, plugin_type_info=()):
@@ -71,15 +69,14 @@ class PluginRegistry(SimpleItem):
         self._plugin_type_info = PersistentMapping()
         for interface in plugin_type_info:
             self._plugin_type_info[interface[0]] = {
-                  'id': interface[1]
-                , 'title': interface[2]
-                , 'description': interface[3]
-                }
+                  'id': interface[1],
+                  'title': interface[2],
+                  'description': interface[3]}
 
     #
     #   IPluginRegistry implementation
     #
-    security.declareProtected(ManageUsers, 'listPluginTypeInfo')
+    @security.protected(ManageUsers)
     def listPluginTypeInfo(self):
 
         """ See IPluginRegistry.
@@ -96,7 +93,7 @@ class PluginRegistry(SimpleItem):
 
         return result
 
-    security.declareProtected(ManageUsers, 'listPlugins')
+    @security.protected(ManageUsers)
     def listPlugins(self, plugin_type):
 
         """ See IPluginRegistry.
@@ -109,15 +106,14 @@ class PluginRegistry(SimpleItem):
 
             plugin = parent._getOb(plugin_id)
             if not _satisfies(plugin, plugin_type):
-                logger.debug('Active plugin %s no longer implements %s'
-                                % (plugin_id, plugin_type)
-                           )
+                logger.debug('Active plugin %s no longer implements %s' %
+                             (plugin_id, plugin_type))
             else:
                 result.append((plugin_id, plugin))
 
         return result
 
-    security.declareProtected(ManageUsers, 'getPluginInfo')
+    @security.protected(ManageUsers)
     def getPluginInfo(self, plugin_type):
 
         """ See IPluginRegistry.
@@ -125,7 +121,7 @@ class PluginRegistry(SimpleItem):
         plugin_type = self._getInterfaceFromName(plugin_type)
         return self._plugin_type_info[plugin_type]
 
-    security.declareProtected(ManageUsers, 'listPluginIds')
+    @security.protected(ManageUsers)
     def listPluginIds(self, plugin_type):
 
         """ See IPluginRegistry.
@@ -133,7 +129,7 @@ class PluginRegistry(SimpleItem):
 
         return self._getPlugins(plugin_type)
 
-    security.declareProtected(ManageUsers, 'activatePlugin')
+    @security.protected(ManageUsers)
     def activatePlugin(self, plugin_type, plugin_id):
 
         """ See IPluginRegistry.
@@ -153,20 +149,20 @@ class PluginRegistry(SimpleItem):
         plugins.append(plugin_id)
         self._plugins[plugin_type] = tuple(plugins)
 
-    security.declareProtected(ManageUsers, 'deactivatePlugin')
+    @security.protected(ManageUsers)
     def deactivatePlugin(self, plugin_type, plugin_id):
 
         """ See IPluginRegistry.
         """
         plugins = list(self._getPlugins(plugin_type))
 
-        if not plugin_id in plugins:
+        if plugin_id not in plugins:
             raise KeyError('Invalid plugin id: {0}'.format(plugin_id))
 
         plugins = [x for x in plugins if x != plugin_id]
         self._plugins[plugin_type] = tuple(plugins)
 
-    security.declareProtected(ManageUsers, 'movePluginsUp')
+    @security.protected(ManageUsers)
     def movePluginsUp(self, plugin_type, ids_to_move):
 
         """ See IPluginRegistry.
@@ -191,7 +187,7 @@ class PluginRegistry(SimpleItem):
 
         self._plugins[plugin_type] = tuple(ids)
 
-    security.declareProtected(ManageUsers, 'movePluginsDown')
+    @security.protected(ManageUsers)
     def movePluginsDown(self, plugin_type, ids_to_move):
 
         """ See IPluginRegistry.
@@ -225,68 +221,48 @@ class PluginRegistry(SimpleItem):
     arrow_up_gif = ImageFile('www/arrow-up.gif', globals())
     arrow_down_gif = ImageFile('www/arrow-down.gif', globals())
 
-    security.declareProtected(ManageUsers, 'manage_activatePlugins')
-    def manage_activatePlugins(self
-                             , plugin_type
-                             , plugin_ids
-                             , RESPONSE
-                            ):
+    @security.protected(ManageUsers)
+    def manage_activatePlugins(self, plugin_type, plugin_ids, RESPONSE):
         """ Shim into ZMI.
         """
         interface = self._getInterfaceFromName(plugin_type)
         for id in plugin_ids:
             self.activatePlugin(interface, id)
-        RESPONSE.redirect('%s/manage_plugins?plugin_type=%s'
-                         % (self.absolute_url(), plugin_type)
-                        )
+        RESPONSE.redirect('%s/manage_plugins?plugin_type=%s' %
+                          (self.absolute_url(), plugin_type))
 
-    security.declareProtected(ManageUsers, 'manage_deactivatePlugins')
-    def manage_deactivatePlugins(self
-                                , plugin_type
-                                , plugin_ids
-                                , RESPONSE
-                               ):
+    @security.protected(ManageUsers)
+    def manage_deactivatePlugins(self, plugin_type, plugin_ids, RESPONSE):
         """ Shim into ZMI.
         """
         interface = self._getInterfaceFromName(plugin_type)
         for id in plugin_ids:
             self.deactivatePlugin(interface, id)
 
-        RESPONSE.redirect('%s/manage_plugins?plugin_type=%s'
-                         % (self.absolute_url(), plugin_type)
-                        )
+        RESPONSE.redirect('%s/manage_plugins?plugin_type=%s' %
+                          (self.absolute_url(), plugin_type))
 
-    security.declareProtected(ManageUsers, 'manage_movePluginsUp')
-    def manage_movePluginsUp(self
-                            , plugin_type
-                            , plugin_ids
-                            , RESPONSE
-                           ):
+    @security.protected(ManageUsers)
+    def manage_movePluginsUp(self, plugin_type, plugin_ids, RESPONSE):
         """ Shim into ZMI.
         """
         interface = self._getInterfaceFromName(plugin_type)
         self.movePluginsUp(interface, plugin_ids)
 
-        RESPONSE.redirect('%s/manage_plugins?plugin_type=%s'
-                         % (self.absolute_url(), plugin_type)
-                        )
+        RESPONSE.redirect('%s/manage_plugins?plugin_type=%s' %
+                          (self.absolute_url(), plugin_type))
 
-    security.declareProtected(ManageUsers, 'manage_movePluginsDown')
-    def manage_movePluginsDown(self
-                              , plugin_type
-                              , plugin_ids
-                              , RESPONSE
-                             ):
+    @security.protected(ManageUsers)
+    def manage_movePluginsDown(self, plugin_type, plugin_ids, RESPONSE):
         """ Shim into ZMI.
         """
         interface = self._getInterfaceFromName(plugin_type)
         self.movePluginsDown(interface, plugin_ids)
 
-        RESPONSE.redirect('%s/manage_plugins?plugin_type=%s'
-                         % (self.absolute_url(), plugin_type)
-                        )
+        RESPONSE.redirect('%s/manage_plugins?plugin_type=%s' %
+                          (self.absolute_url(), plugin_type))
 
-    security.declareProtected(ManageUsers, 'getAllPlugins')
+    @security.protected(ManageUsers)
     def getAllPlugins(self, plugin_type):
 
         """ Return a mapping segregating active / available plugins.
@@ -303,10 +279,9 @@ class PluginRegistry(SimpleItem):
                 if id not in active:
                     available.append(id)
 
-        return { 'active' : active, 'available' : available }
+        return {'active': active, 'available': available}
 
-
-    security.declareProtected(ManageUsers, 'removePluginById')
+    @security.protected(ManageUsers)
     def removePluginById(self, plugin_id):
 
         """ Remove a plugin from any plugin types which have it configured.
@@ -322,23 +297,15 @@ class PluginRegistry(SimpleItem):
     manage_active = PageTemplateFile('active_plugins', _wwwdir)
     manage_twoLists = PageTemplateFile('two_lists', _wwwdir)
 
-    manage_options=(({ 'label'  : 'Plugins'
-                       , 'action' : 'manage_plugins'
-                     # , 'help'   : ('PluggableAuthService'
-                     #              , 'plugins.stx')
-                       }
-                     , { 'label'  : 'Active'
-                       , 'action' : 'manage_active'
-                       }
-                    )
-                   + SimpleItem.manage_options
-                  )
+    manage_options = (({'label': 'Plugins', 'action': 'manage_plugins'},
+                       {'label': 'Active', 'action': 'manage_active'})
+                      + SimpleItem.manage_options)
 
     if _HAS_GENERIC_SETUP:
         security.declareProtected(ManageUsers, 'manage_exportImportForm')
         manage_exportImportForm = PageTemplateFile('export_import', _wwwdir)
 
-        security.declareProtected(ManageUsers, 'getConfigAsXML')
+        @security.protected(ManageUsers)
         def getConfigAsXML(self):
             """ Return XML representing the registry's configuration.
             """
@@ -346,23 +313,23 @@ class PluginRegistry(SimpleItem):
             pre = PluginRegistryExporter(self).__of__(self)
             return pre.generateXML()
 
-        security.declareProtected(ManageUsers, 'manage_exportImport')
+        @security.protected(ManageUsers)
         def manage_exportImport(self, updated_xml, should_purge, RESPONSE):
             """ Parse XML and update the registry.
             """
-            #XXX encoding?
+            # XXX encoding?
             _updatePluginRegistry(self, updated_xml, should_purge)
             RESPONSE.redirect('%s/manage_exportImportForm'
-                              '?manage_tabs_message=Registry+updated.'
-                                % self.absolute_url())
+                              '?manage_tabs_message=Registry+updated.' %
+                              self.absolute_url())
 
-        security.declareProtected(ManageUsers, 'manage_FTPget')
+        @security.protected(ManageUsers)
         def manage_FTPget(self, REQUEST, RESPONSE):
             """
             """
             return self.getConfigAsXML()
 
-        security.declareProtected(ManageUsers, 'PUT')
+        @security.protected(ManageUsers)
         def PUT(self, REQUEST, RESPONSE):
             """
             """
@@ -370,19 +337,15 @@ class PluginRegistry(SimpleItem):
             _updatePluginRegistry(self, xml, True)
 
         manage_options = (manage_options[:2]
-                         + ({ 'label' : 'Export / Import'
-                             , 'action' : 'manage_exportImportForm'
-                             },)
-                         + manage_options[2:]
-                        )
+                          + ({'label': 'Export / Import',
+                              'action': 'manage_exportImportForm'},)
+                          + manage_options[2:])
 
     #
     #   Helper methods
     #
-    security.declarePrivate('_getPlugins')
+    @security.private
     def _getPlugins(self, plugin_type):
-
-        parent = aq_parent(aq_inner(self))
 
         if plugin_type not in self._plugin_types:
             raise KeyError(plugin_type)
@@ -392,7 +355,7 @@ class PluginRegistry(SimpleItem):
 
         return self._plugins.setdefault(plugin_type, ())
 
-    security.declarePrivate('_getInterfaceFromName')
+    @security.private
     def _getInterfaceFromName(self, plugin_type_name):
 
         """ Convert the string name to an interface.
@@ -400,7 +363,7 @@ class PluginRegistry(SimpleItem):
         o Raise KeyError if no such interface is known.
         """
         found = [x[0] for x in self._plugin_type_info.items()
-                                if x[1]['id'] == plugin_type_name]
+                 if x[1]['id'] == plugin_type_name]
         if not found:
             raise KeyError(plugin_type_name)
 
@@ -409,14 +372,17 @@ class PluginRegistry(SimpleItem):
 
         return found[0]
 
+
 InitializeClass(PluginRegistry)
+
 
 def _satisfies(plugin, iface):
     checker = getattr(iface, 'providedBy', None)
-    if checker is None: # BBB for Zope 2.7?
+    if checker is None:  # BBB for Zope 2.7?
         checker = iface.isImplementedBy
 
     return checker(plugin)
+
 
 def emptyPluginRegistry(ignored):
     """ Return empty registry, for filling from setup profile.

@@ -22,17 +22,13 @@ from zope.interface import implementer
 
 from Products.GenericSetup.interfaces import IFilesystemExporter
 from Products.GenericSetup.interfaces import IFilesystemImporter
-from Products.GenericSetup.content import FauxDAVRequest
-from Products.GenericSetup.content import FauxDAVResponse
 from Products.GenericSetup.utils import ExportConfiguratorBase
 from Products.GenericSetup.utils import ImportConfiguratorBase
 from Products.GenericSetup.utils import _getDottedName
 from Products.GenericSetup.utils import _resolveDottedName
-from Products.GenericSetup.utils import CONVERTER
 from Products.GenericSetup.utils import DEFAULT
 from Products.GenericSetup.utils import KEY
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from six import StringIO
 
 from Products.PluginRegistry.interfaces import IPluginRegistry
 
@@ -40,11 +36,13 @@ from Products.PluginRegistry.interfaces import IPluginRegistry
 def _providedBy(obj, iface):
     return iface.providedBy(obj)
 
+
 _FILENAME = 'pluginregistry.xml'
+
 
 def _getRegistry(site):
     registries = [x for x in site.objectValues()
-                    if _providedBy(x, IPluginRegistry)]
+                  if _providedBy(x, IPluginRegistry)]
 
     if len(registries) < 1:
         raise ValueError('No plugin registries')
@@ -53,6 +51,7 @@ def _getRegistry(site):
         raise ValueError('Too many plugin registries')
 
     return registries[0]
+
 
 def exportPluginRegistry(context):
     """ Export plugin registry as an XML file.
@@ -65,6 +64,7 @@ def exportPluginRegistry(context):
     context.writeDataFile(_FILENAME, xml, 'text/xml')
 
     return 'Plugin registry exported.'
+
 
 def _updatePluginRegistry(registry, xml, should_purge, encoding='utf-8'):
 
@@ -80,7 +80,6 @@ def _updatePluginRegistry(registry, xml, should_purge, encoding='utf-8'):
     if registry._plugins is None:
         registry._plugins = PersistentMapping()
 
-
     pir = PluginRegistryImporter(registry, encoding)
     reg_info = pir.parseXML(xml)
 
@@ -89,11 +88,12 @@ def _updatePluginRegistry(registry, xml, should_purge, encoding='utf-8'):
         # Avoid duplicate plugin types
         if iface not in registry._plugin_types:
             registry._plugin_types.append(iface)
-        registry._plugin_type_info[iface] = {'id': info['id'],
-                                             'title': info['title'],
-                                             'description': info['description'],
-                                            }
+        registry._plugin_type_info[iface] = {
+            'id': info['id'],
+            'title': info['title'],
+            'description': info['description']}
         registry._plugins[iface] = tuple([x['id'] for x in info['plugins']])
+
 
 def importPluginRegistry(context):
     """ Import plugin registry from an XML file.
@@ -111,6 +111,7 @@ def importPluginRegistry(context):
 
     return 'Plugin registry imported.'
 
+
 class PluginRegistryExporter(ExportConfiguratorBase):
 
     def __init__(self, context, encoding='utf-8'):
@@ -127,6 +128,7 @@ class PluginRegistryExporter(ExportConfiguratorBase):
             info['plugins'] = self.context.listPluginIds(iface)
             yield info
 
+
 class PluginRegistryImporter(ImportConfiguratorBase):
 
     def __init__(self, context, encoding='utf-8'):
@@ -135,21 +137,15 @@ class PluginRegistryImporter(ImportConfiguratorBase):
 
     def _getImportMapping(self):
 
-        return {
-          'plugin-registry':
-            {'plugin-type': {KEY: 'plugin_types', DEFAULT: ()},
-            },
-          'plugin-type':
-            {'id':          {KEY: 'id'},
-             'interface':   {KEY: 'interface'},
-             'title':       {KEY: 'title'},
-             'description': {KEY: 'description'},
-             'plugin':      {KEY: 'plugins', DEFAULT: ()}
-            },
-          'plugin':
-            {'id':          {KEY: 'id'},
-            },
-         }
+        return {'plugin-registry':
+                {'plugin-type': {KEY: 'plugin_types', DEFAULT: ()}},
+                'plugin-type':
+                    {'id': {KEY: 'id'},
+                     'interface': {KEY: 'interface'},
+                     'title': {KEY: 'title'},
+                     'description': {KEY: 'description'},
+                     'plugin': {KEY: 'plugins', DEFAULT: ()}},
+                'plugin': {'id': {KEY: 'id'}}}
 
 
 @implementer(IFilesystemExporter, IFilesystemImporter)
@@ -166,11 +162,7 @@ class PluginRegistryFileExportImportAdapter(object):
         context = self.context
         pre = PluginRegistryExporter(context).__of__(context)
         xml = pre.generateXML()
-        export_context.writeDataFile(_FILENAME,
-                                     xml,
-                                     'text/xml',
-                                     subdir,
-                                    )
+        export_context.writeDataFile(_FILENAME, xml, 'text/xml', subdir)
 
     def listExportableItems(self):
         """ See IFilesystemExporter.
@@ -185,10 +177,7 @@ class PluginRegistryFileExportImportAdapter(object):
             import_context.note('SGAIFA',
                                 'no pluginregistry.xml in %s' % subdir)
         else:
-            request = FauxDAVRequest(BODY=data, BODYFILE=StringIO(data))
-            response = FauxDAVResponse()
             _updatePluginRegistry(self.context,
                                   data,
                                   import_context.shouldPurge(),
-                                  import_context.getEncoding(),
-                                 )
+                                  import_context.getEncoding())
