@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-1.6 (unreleased)
+1.6 (2018-05-17)
 ----------------
 
 - Added Python 3.5 and 3.6 compatibility.
@@ -17,6 +17,7 @@ Breaking changes:
 - Drop support for Python 2.6.
 
 - Require Zope 4.0a3 as minimum supported Zope version.
+
 
 1.4 (2016-03-01)
 ----------------
