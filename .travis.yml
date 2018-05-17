@@ -1,12 +1,23 @@
 sudo: false
-dist: trusty
 language: python
+cache:
+    directories:
+        - $TRAVIS_BUILD_DIR/eggs
 python:
   - "2.7"
+  - "3.5"
+  - "3.6"
 install:
+    - pip install -U coverage coveralls
     - python bootstrap.py
     - bin/buildout
 script:
-    - bin/test -pvc
+    - coverage run bin/test -vvc
+after_success:
+    - coveralls
 notifications:
     email: tseaver@palladion.com
+cache:
+    - pip: true
+    - directories:
+      - eggs/
