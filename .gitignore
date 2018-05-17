@@ -6,7 +6,9 @@ parts
 *.pyc
 *.pyo
 .installed.cfg
+.coverage
 develop-eggs/
 eggs/
+htmlcov/
 *.egg-info/
 .tox/
