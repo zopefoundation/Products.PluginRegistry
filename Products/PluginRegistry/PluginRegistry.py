@@ -87,7 +87,7 @@ class PluginRegistry(SimpleItem):
 
             info = self._plugin_type_info[ptype].copy()
             info['interface'] = ptype
-            info['methods'] = ptype.names()
+            info['methods'] = list(ptype.names())
 
             result.append(info)
 
