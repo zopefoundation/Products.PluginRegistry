@@ -45,7 +45,7 @@ setup(
     keywords='web application server zope zope2',
     author="Zope Foundation and Contributors",
     author_email="zope-cmf@lists.zope.org",
-    url="https://pypi.python.org/pypi/Products.PluginRegistry",
+    url="https://pypi.org/project/Products.PluginRegistry",
     license="ZPL 2.1 (http://www.zope.org/Resources/License/ZPL-2.1)",
     packages=find_packages(),
     include_package_data=True,
