@@ -3,12 +3,13 @@ dist
 lib
 parts
 
+*.egg-info/
 *.pyc
 *.pyo
-.installed.cfg
 .coverage
+.installed.cfg
+.tox/
+coverage.xml
 develop-eggs/
 eggs/
 htmlcov/
-*.egg-info/
-.tox/
