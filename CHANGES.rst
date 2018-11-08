@@ -1,8 +1,8 @@
 Change Log
 ==========
 
-1.7 (unreleased)
-----------------
+1.6.1 (2018-11-08)
+------------------
 
 - Fix listPluginTypeInfo in Python 3.
 
