@@ -2,6 +2,7 @@ bin
 dist
 lib
 parts
+flake8
 
 *.egg-info/
 *.pyc
