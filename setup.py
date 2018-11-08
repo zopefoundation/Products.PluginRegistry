@@ -45,7 +45,7 @@ setup(
     keywords='web application server zope zope2',
     author="Zope Foundation and Contributors",
     author_email="zope-cmf@lists.zope.org",
-    url="https://pypi.org/project/Products.PluginRegistry",
+    url="https://github.com/zopefoundation/Products.PluginRegistry",
     license="ZPL 2.1 (http://www.zope.org/Resources/License/ZPL-2.1)",
     packages=find_packages(),
     include_package_data=True,
@@ -56,9 +56,9 @@ setup(
         'six',
         'Zope >= 4.0b4',
         'Products.GenericSetup >= 2.0b1'
-        ],
+    ],
     entry_points="""
     [zope2.initialize]
     Products.PluginRegistry = Products.PluginRegistry:initialize
     """,
-    )
+)

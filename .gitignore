@@ -8,6 +8,7 @@ flake8
 *.pyc
 *.pyo
 .coverage
+.coverage.*
 .installed.cfg
 .tox/
 coverage.xml
