@@ -4,7 +4,9 @@ Change Log
 1.7 (unreleased)
 ----------------
 
-- Add support for Python 3.7.
+- Specify supported Python versions using ``python_requires`` in setup.py
+
+- Added support for Python 3.7 and 3.8
 
 
 1.6.1 (2018-11-08)
