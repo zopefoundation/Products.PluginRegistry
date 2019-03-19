@@ -34,6 +34,7 @@ from Products.PluginRegistry.interfaces import IPluginRegistry
 
 try:
     from Products.PluginRegistry.exportimport import _updatePluginRegistry
+    from Products.PluginRegistry.exportimport import PluginRegistryExporter
 except ImportError:
     _HAS_GENERIC_SETUP = False
 else:
@@ -309,7 +310,6 @@ class PluginRegistry(SimpleItem):
         def getConfigAsXML(self):
             """ Return XML representing the registry's configuration.
             """
-            from exportimport import PluginRegistryExporter
             pre = PluginRegistryExporter(self).__of__(self)
             return pre.generateXML()
 
