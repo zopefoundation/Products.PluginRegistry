@@ -1,6 +1,8 @@
 import os
-from setuptools import setup
+
 from setuptools import find_packages
+from setuptools import setup
+
 
 here = os.path.abspath(os.path.dirname(__file__))
 package = os.path.join(here, 'Products', 'PluginRegistry')
@@ -30,6 +32,7 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Framework :: Plone",
         "Framework :: Plone :: 5.2",
+        'Framework :: Zope',
         "Framework :: Zope :: 4",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: Zope Public License",
@@ -48,7 +51,12 @@ setup(
     author="Zope Foundation and Contributors",
     author_email="zope-cmf@lists.zope.org",
     url="https://github.com/zopefoundation/Products.PluginRegistry",
-    license="ZPL 2.1 (http://www.zope.org/Resources/License/ZPL-2.1)",
+    project_urls={
+        'Issue Tracker': ('https://github.com/zopefoundation/Products.'
+                          'PluginRegistry/issues'),
+        'Sources': 'https://github.com/zopefoundation/Products.PluginRegistry',
+    },
+    license="ZPL 2.1",
     packages=find_packages(),
     include_package_data=True,
     namespace_packages=['Products'],
