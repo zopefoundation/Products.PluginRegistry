@@ -8,6 +8,9 @@ Change Log
 
 - Added support for Python 3.7 and 3.8
 
+- Fix relative import that broke import/export.
+  [pbauer]
+
 
 1.6.1 (2018-11-08)
 ------------------
