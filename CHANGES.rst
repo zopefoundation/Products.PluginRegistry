@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-1.7 (unreleased)
+1.7 (2019-04-02)
 ----------------
 
 - updated ZMI views and icon for Zope 4
