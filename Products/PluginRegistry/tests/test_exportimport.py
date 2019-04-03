@@ -16,6 +16,7 @@
 """
 import unittest
 
+
 try:
     import Products.GenericSetup  # noqa
 except ImportError:
@@ -48,8 +49,8 @@ else:
 """
 
     _PLUGIN_TYPE_INFO = (
-      (IFoo, 'IFoo', 'foo', "Some plugin interface"),
-      (IBar, 'IBar', 'bar', "Another plugin interface"))
+      (IFoo, 'IFoo', 'foo', 'Some plugin interface'),
+      (IBar, 'IBar', 'bar', 'Another plugin interface'))
 
     _NO_PLUGINS_PLUGINREGISTRY_EXPORT = """\
 <?xml version="1.0"?>

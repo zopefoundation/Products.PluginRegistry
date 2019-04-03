@@ -18,19 +18,17 @@ $Id$
 """
 
 from Persistence import PersistentMapping
-from zope.interface import implementer
-
 from Products.GenericSetup.interfaces import IFilesystemExporter
 from Products.GenericSetup.interfaces import IFilesystemImporter
+from Products.GenericSetup.utils import DEFAULT
+from Products.GenericSetup.utils import KEY
 from Products.GenericSetup.utils import ExportConfiguratorBase
 from Products.GenericSetup.utils import ImportConfiguratorBase
 from Products.GenericSetup.utils import _getDottedName
 from Products.GenericSetup.utils import _resolveDottedName
-from Products.GenericSetup.utils import DEFAULT
-from Products.GenericSetup.utils import KEY
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-
 from Products.PluginRegistry.interfaces import IPluginRegistry
+from zope.interface import implementer
 
 
 def _providedBy(obj, iface):

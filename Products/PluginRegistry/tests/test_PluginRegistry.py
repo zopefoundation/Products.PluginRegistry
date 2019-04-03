@@ -14,8 +14,8 @@
 ##############################################################################
 import unittest
 
-from OFS.Folder import Folder
 from Acquisition import Implicit
+from OFS.Folder import Folder
 
 
 class DummyFolder(Folder):

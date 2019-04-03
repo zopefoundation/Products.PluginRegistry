@@ -16,21 +16,22 @@
 import logging
 import os
 
+import six
+
 from AccessControl import ClassSecurityInfo
-from AccessControl.Permissions import manage_users as ManageUsers
-from Acquisition import aq_parent
-from Acquisition import aq_inner
 from AccessControl.class_init import default__class_init__ as InitializeClass
+from AccessControl.Permissions import manage_users as ManageUsers
+from Acquisition import aq_inner
+from Acquisition import aq_parent
 from App.Common import package_home
 from App.ImageFile import ImageFile
+from OFS.interfaces import IWriteLock
 from OFS.SimpleItem import SimpleItem
 from Persistence import PersistentMapping
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from OFS.interfaces import IWriteLock
-import six
+from Products.PluginRegistry.interfaces import IPluginRegistry
 from zope.interface import implementer
 
-from Products.PluginRegistry.interfaces import IPluginRegistry
 
 try:
     from Products.PluginRegistry.exportimport import _updatePluginRegistry
@@ -292,9 +293,11 @@ class PluginRegistry(SimpleItem):
             if plugin_id in self._getPlugins(plugin_type):
                 self.deactivatePlugin(plugin_type, plugin_id)
 
-    security.declareProtected(ManageUsers, 'manage_plugins')
+    security.declareProtected(ManageUsers,  # NOQA: flake8: D001
+                              'manage_plugins')
     manage_plugins = PageTemplateFile('plugins', _wwwdir)
-    security.declareProtected(ManageUsers, 'manage_active')
+    security.declareProtected(ManageUsers,  # NOQA: flake8: D001
+                              'manage_active')
     manage_active = PageTemplateFile('active_plugins', _wwwdir)
     manage_twoLists = PageTemplateFile('two_lists', _wwwdir)
 
@@ -303,7 +306,8 @@ class PluginRegistry(SimpleItem):
                       + SimpleItem.manage_options)
 
     if _HAS_GENERIC_SETUP:
-        security.declareProtected(ManageUsers, 'manage_exportImportForm')
+        security.declareProtected(ManageUsers,  # NOQA: flake8: D001
+                                  'manage_exportImportForm')
         manage_exportImportForm = PageTemplateFile('export_import', _wwwdir)
 
         @security.protected(ManageUsers)
@@ -317,7 +321,7 @@ class PluginRegistry(SimpleItem):
         def manage_exportImport(self, updated_xml, should_purge, RESPONSE):
             """ Parse XML and update the registry.
             """
-            # XXX encoding?
+            # encoding?
             _updatePluginRegistry(self, updated_xml, should_purge)
             RESPONSE.redirect('%s/manage_exportImportForm'
                               '?manage_tabs_message=Registry+updated.' %

@@ -4,12 +4,14 @@ Change Log
 1.7 (unreleased)
 ----------------
 
+- expanded PEP-8 and isort compliance
+
 - Specify supported Python versions using ``python_requires`` in setup.py
 
 - Added support for Python 3.7 and 3.8
 
-- Fix relative import that broke import/export.
-  [pbauer]
+- Fix relative import that broke import/export
+  (`#12 <https://github.com/zopefoundation/Products.PluginRegistry/pull/12>`_)
 
 
 1.6.1 (2018-11-08)
