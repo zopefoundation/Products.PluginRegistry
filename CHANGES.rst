@@ -4,6 +4,9 @@ Change Log
 1.7 (unreleased)
 ----------------
 
+- updated ZMI views and icon for Zope 4
+  (`#14 <https://github.com/zopefoundation/Products.PluginRegistry/issues/14>`_)
+
 - expanded PEP-8 and isort compliance
 
 - Specify supported Python versions using ``python_requires`` in setup.py

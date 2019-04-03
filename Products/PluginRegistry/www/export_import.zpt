@@ -1,7 +1,9 @@
 <h1 tal:replace="structure here/manage_page_header"> PAGE HEADER </h1>
 <h2 tal:replace="structure here/manage_tabs"> TABS </h2>
 
-<h3> Export / Import Registry Configuration </h3>
+<main class="container-fluid">
+
+<h2 class="zmi-form-title">Export / Import Registry Configuration</h2>
 
 <p class="form-help">
   This view allows you to view and edit the registry configuration as
@@ -9,37 +11,38 @@
 </p>
 
 <form action="." method="POST" enctype="multipart/form-data"
-      tal:attributes="action
-                        string:${context/absolute_url}/manage_exportImportForm;
-                     ">
-<table>
+      tal:define="url context/absolute_url"
+      tal:attributes="action string:${url}/manage_exportImportForm;">
 
- <tr>
-  <th> Purge old config? </th>
-  <td>
-   <input type="hidden" name="should_purge:default:int" value="0" />
-   <input type="checkbox" name="should_purge:int" value="1" checked="checked" />
-  </td>
- </tr>
+  <div class="form-group row">
+    <label for="should_purge"
+           class="form-label col-sm-3 col-md-2">Purge old config?</label>
+    <div class="col-sm-9 col-md-10">
+        <input type="hidden" name="should_purge:default:int" value="0" />
+        <input class="form-control" type="checkbox" name="should_purge:int"
+               id="should_purge" value="1" checked="checked" />
+    </div>
+  </div>
 
- <tr>
-  <th> Configuration </th>
-  <td>
-   <textarea name="xml:text" rows="30" cols="80"
-             tal:content="context/getConfigAsXML"
-   ></textarea>
-  </td>
- </tr>
+  <div class="form-group row">
+    <label for="xml"
+           class="form-label col-sm-3 col-md-2">Configuration</label>
+    <div class="col-sm-9 col-md-10">
+      <textarea id="content" data-contenttype="xml"
+                class="form-control zmi-zpt zmi-code col-sm-12" 
+                name="xml:text" wrap="off" rows="20" data-readonly="false"
+                tal:content="context/getConfigAsXML"></textarea>
+    </div>
+  </div>
 
- <tr>
-  <td />
-  <td>
-   <input type="submit" value=" Save " />
-  </td>
- </tr>
+  <div class="zmi-controls">
+      <input class="btn btn-primary" type="submit" name="submit"
+             value="Save" />
+  </div>
 
-</table>
 </form>
+
+</main>
 
 <h1 tal:replace="structure here/manage_page_footer"> PAGE FOOTER </h1>
 

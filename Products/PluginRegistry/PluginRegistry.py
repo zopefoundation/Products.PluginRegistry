@@ -59,6 +59,7 @@ class PluginRegistry(SimpleItem):
 
     security = ClassSecurityInfo()
     meta_type = 'Plugin Registry'
+    zmi_icon = 'fas fa-plug'
     _plugins = None
 
     def __init__(self, plugin_type_info=()):

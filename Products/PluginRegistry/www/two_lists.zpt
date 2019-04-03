@@ -51,15 +51,15 @@ by the including template:
       </select>
     </td>
     <td align="center" valign="middle">
-      <input type="image" src="arrow_right_gif"
-             width="29" height="30" border="0"
-             name="left_to_right:method"
-             tal:attributes="name string:${left_to_right}:method"/>
-      <br /><br />
-      <input type="image" src="arrow_left_gif"
-             width="29" height="30" border="0"
-             name="right_to_left:method"
-             tal:attributes="name string:${right_to_left}:method"/>
+      <button class="btn btn-sm btn-light" name="left_to_right:method"
+              tal:attributes="name string:${left_to_right}:method">
+        <i class="far fa-arrow-alt-circle-right fa-3x"></i>
+      </button>
+      <br/>
+      <button class="btn btn-sm btn-light" name="right_to_left:method"
+              tal:attributes="name string:${right_to_left}:method">
+        <i class="far fa-arrow-alt-circle-left fa-3x"></i>
+      </button>
     </td>
     <td valign="top">
       <div align="center">
@@ -74,17 +74,16 @@ by the including template:
       </select>
     </td>
     <td align="center" valign="middle"
-        tal:condition="right_is_ordered | nothing"
-    >
-      <input type="image" src="arrow_up_gif"
-             width="29" height="30" border="0"
-             name="move_up:method"
-             tal:attributes="name string:${move_up}:method"/>
-      <br /><br />
-      <input type="image" src="arrow_down_gif"
-             width="29" height="30" border="0"
-             name="move_down:method"
-             tal:attributes="name string:${move_down}:method"/>
+        tal:condition="right_is_ordered | nothing">
+      <button class="btn btn-sm btn-light" name="move_up:method"
+              tal:attributes="name string:${move_up}:method">
+        <i class="far fa-arrow-alt-circle-up fa-3x"></i>
+      </button>
+      <br/>
+      <button class="btn btn-sm btn-light" name="move_down:method"
+              tal:attributes="name string:${move_down}:method">
+        <i class="far fa-arrow-alt-circle-down fa-3x"></i>
+      </button>
     </td>
  </tr>
 </table>
