@@ -163,6 +163,19 @@ class PluginRegistry(SimpleItem):
         plugins = [x for x in plugins if x != plugin_id]
         self._plugins[plugin_type] = tuple(plugins)
 
+    security.declareProtected(ManageUsers, 'movePluginsTop')
+    def movePluginsTop(self, plugin_type, ids_to_move):
+
+        """ See IPluginRegistry.
+        """
+	ids = list(self._getPlugins(plugin_type))
+	count = len(ids)
+	indexes = list(map(ids.index, ids_to_move))
+	indexes.sort()
+	for i1 in indexes:
+	    ids.insert(0, ids.pop(i1))
+	self._plugins[plugin_type] = tuple(ids)
+
     security.declareProtected(ManageUsers, 'movePluginsUp')
     def movePluginsUp(self, plugin_type, ids_to_move):
 

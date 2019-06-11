@@ -90,6 +90,21 @@ class IPluginRegistry(Interface):
           - If any item is not the ID of a current plugin, raise ValueError.
         """
 
+    def movePluginsTop(plugin_type, ids_to_move):
+
+        """ Move a set of plugins to the "top" in their list.
+
+        o 'plugin_type' must be one of the known types, else raise KeyError.
+
+        o 'ids_to_move' must be a sequence of ids of current plugins
+          for that type.
+
+          - If any item is not the ID of a current plugin, raise ValueError.
+          - Moving one plugin to top has obvious result;
+            moving more than one plugin to top puts them one by on at the top
+            iow, last in the list gets to top
+        """
+
     def movePluginsDown(plugin_type, ids_to_move):
 
         """ Move a set of plugins "down" in their list.
