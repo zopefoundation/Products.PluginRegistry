@@ -238,7 +238,7 @@ class PluginRegistryTests(unittest.TestCase):
         self.assertEqual(idlist[1], 'foo_plugin')
         self.assertEqual(idlist[2], 'baz_plugin')
 
-        # Moving more than one plugin to top puts them 
+        # Moving more than one plugin to top puts them
         # one by on at the top
         # iow, last in the list gets to top
         preg.movePluginsTop(IFoo, ('bar_plugin', 'baz_plugin'))
