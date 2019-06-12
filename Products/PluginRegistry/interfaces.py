@@ -102,7 +102,7 @@ class IPluginRegistry(Interface):
 
           - If any item is not the ID of a current plugin, raise ValueError.
           - Moving one plugin to top has obvious result;
-            moving more than one plugin to top puts them one by on at the top
+            moving more than one plugin to top puts them one by one at the top
             iow, last in the list gets to top
         """
 
