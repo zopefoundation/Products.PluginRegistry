@@ -203,6 +203,65 @@ class PluginRegistryTests(unittest.TestCase):
         self.assertEqual(idlist[0], 'foo_plugin')
         self.assertEqual(idlist[1], 'baz_plugin')
 
+    def test_movePluginsTop(self):
+        from zope.interface import directlyProvides
+        plugin_info, IFoo, IBar = self._makePluginInfo()
+        parent = DummyFolder()
+        foo_plugin = DummyPlugin()
+        directlyProvides(foo_plugin, (IFoo,))
+        parent._setObject('foo_plugin', foo_plugin)
+
+        bar_plugin = DummyPlugin()
+        directlyProvides(bar_plugin, (IFoo,))
+        parent._setObject('bar_plugin', bar_plugin)
+
+        baz_plugin = DummyPlugin()
+        directlyProvides(baz_plugin, (IFoo,))
+        parent._setObject('baz_plugin', baz_plugin)
+
+        preg = self._makeOne(plugin_info).__of__(parent)
+
+        preg.activatePlugin(IFoo, 'foo_plugin')
+        preg.activatePlugin(IFoo, 'bar_plugin')
+        preg.activatePlugin(IFoo, 'baz_plugin')
+
+        self.assertRaises(ValueError,
+                          preg.movePluginsTop, IFoo, ('quux_plugin',))
+
+        # Moving one plugin to top has obvious result
+        preg.movePluginsTop(IFoo, ('bar_plugin',))
+
+        idlist = preg.listPluginIds(IFoo)
+        self.assertEqual(len(idlist), 3)
+
+        self.assertEqual(idlist[0], 'bar_plugin')
+        self.assertEqual(idlist[1], 'foo_plugin')
+        self.assertEqual(idlist[2], 'baz_plugin')
+
+        # Moving more than one plugin to top puts them
+        # one by on at the top
+        # iow, last in the list gets to top
+        preg.movePluginsTop(IFoo, ('bar_plugin', 'baz_plugin'))
+
+        idlist = preg.listPluginIds(IFoo)
+        self.assertEqual(len(idlist), 3)
+
+        self.assertEqual(idlist[0], 'baz_plugin')
+        self.assertEqual(idlist[1], 'bar_plugin')
+        self.assertEqual(idlist[2], 'foo_plugin')
+
+        # Moving the top plugin up should not change anything.
+        preg.movePluginsTop(IFoo, ('baz_plugin',))
+        idlist = preg.listPluginIds(IFoo)
+        self.assertEqual(idlist,
+                         ('baz_plugin', 'bar_plugin', 'foo_plugin'))
+
+        # Moving the top plugin and another one could change something.
+        preg.movePluginsTop(IFoo, ('baz_plugin', 'foo_plugin'))
+        idlist = preg.listPluginIds(IFoo)
+        self.assertEqual(idlist,
+                         ('foo_plugin', 'baz_plugin', 'bar_plugin'))
+
     def test_movePluginsUp(self):
         from zope.interface import directlyProvides
         plugin_info, IFoo, IBar = self._makePluginInfo()

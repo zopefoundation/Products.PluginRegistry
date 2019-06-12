@@ -12,6 +12,7 @@ flake8
 .installed.cfg
 .tox/
 coverage.xml
+default.profraw
 develop-eggs/
 eggs/
 htmlcov/
