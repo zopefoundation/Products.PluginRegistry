@@ -1,17 +1,23 @@
 Change Log
 ==========
 
+1.4.1 (unreleased)
+------------------
+
+- Add ``movePluginsTop`` method to registry.
+
+
 1.4 (2016-03-01)
 ----------------
 
-- Fix usage of os.path.split(). Could result in Errors during import
+- Fix usage of ``os.path.split()``. Could result in Errors during import
   on Windows.
 
 
 1.3 (2012-02-27)
 ----------------
 
-- Change default encoding for importexport from None to utf-8.
+- Change default encoding for ``importexport`` from None to utf-8.
 
 
 1.3b1 (2010-07-01)
