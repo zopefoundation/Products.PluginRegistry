@@ -4,6 +4,8 @@ Change Log
 1.8 (unreleased)
 ----------------
 
+- Add ``movePluginsTop`` method to registry.
+
 
 1.7 (2019-04-02)
 ----------------
