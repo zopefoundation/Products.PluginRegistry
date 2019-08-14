@@ -6,6 +6,8 @@ Change Log
 
 - Add ``movePluginsTop`` method to registry.
 
+- Fix linting.
+
 
 1.7 (2019-04-02)
 ----------------
