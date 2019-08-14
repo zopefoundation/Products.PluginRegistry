@@ -306,10 +306,10 @@ class PluginRegistry(SimpleItem):
             if plugin_id in self._getPlugins(plugin_type):
                 self.deactivatePlugin(plugin_type, plugin_id)
 
-    security.declareProtected(ManageUsers,  # NOQA: flake8: D001
+    security.declareProtected(ManageUsers,  # noqa: D001
                               'manage_plugins')
     manage_plugins = PageTemplateFile('plugins', _wwwdir)
-    security.declareProtected(ManageUsers,  # NOQA: flake8: D001
+    security.declareProtected(ManageUsers,  # noqa: D001
                               'manage_active')
     manage_active = PageTemplateFile('active_plugins', _wwwdir)
     manage_twoLists = PageTemplateFile('two_lists', _wwwdir)
@@ -319,7 +319,7 @@ class PluginRegistry(SimpleItem):
                       + SimpleItem.manage_options)
 
     if _HAS_GENERIC_SETUP:
-        security.declareProtected(ManageUsers,  # NOQA: flake8: D001
+        security.declareProtected(ManageUsers,  # noqa: D001
                                   'manage_exportImportForm')
         manage_exportImportForm = PageTemplateFile('export_import', _wwwdir)
 
