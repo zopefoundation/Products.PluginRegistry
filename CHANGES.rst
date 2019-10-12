@@ -1,8 +1,10 @@
 Change Log
 ==========
 
-1.8 (unreleased)
+1.8 (2019-10-12)
 ----------------
+
+- Rely on Zope 4 branch for unit tests to retain Python 2 compatibility
 
 - Add ``movePluginsTop`` method to registry.
 
