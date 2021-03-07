@@ -28,7 +28,6 @@ else:
     from Products.GenericSetup.tests.common import DummyExportContext
     from Products.GenericSetup.tests.common import DummyImportContext
     from Products.GenericSetup.utils import _getDottedName
-
     from zope.component import provideAdapter
     from zope.component.testing import PlacelessSetup
     from zope.interface import Interface
@@ -120,8 +119,8 @@ else:
     class PluginRegistryExporterTests(_TestBase):
 
         def _getTargetClass(self):
-            from Products.PluginRegistry.exportimport \
-                import PluginRegistryExporter
+            from Products.PluginRegistry.exportimport import \
+                PluginRegistryExporter
             return PluginRegistryExporter
 
         def test_empty(self):
@@ -159,8 +158,8 @@ else:
     class Test_exportPluginRegistry(_TestBase):
 
         def test_empty(self):
-            from Products.PluginRegistry.exportimport \
-                import exportPluginRegistry
+            from Products.PluginRegistry.exportimport import \
+                exportPluginRegistry
             provideAdapter(AttrItemTraverser, (Interface,), ITraversable)
 
             app, registry = self._initRegistry()
@@ -174,8 +173,8 @@ else:
             self.assertEqual(content_type, 'text/xml')
 
         def test_normal_no_plugins(self):
-            from Products.PluginRegistry.exportimport \
-                import exportPluginRegistry
+            from Products.PluginRegistry.exportimport import \
+                exportPluginRegistry
             provideAdapter(AttrItemTraverser, (Interface,), ITraversable)
 
             app, registry = self._initRegistry(
@@ -190,8 +189,8 @@ else:
             self.assertEqual(content_type, 'text/xml')
 
         def test_normal_with_plugins(self):
-            from Products.PluginRegistry.exportimport \
-                import exportPluginRegistry
+            from Products.PluginRegistry.exportimport import \
+                exportPluginRegistry
             provideAdapter(AttrItemTraverser, (Interface,), ITraversable)
 
             app, registry = self._initRegistry(
@@ -210,8 +209,8 @@ else:
     class PluginRegistryImporterTests(_TestBase):
 
         def _getTargetClass(self):
-            from Products.PluginRegistry.exportimport \
-                import PluginRegistryImporter
+            from Products.PluginRegistry.exportimport import \
+                PluginRegistryImporter
             return PluginRegistryImporter
 
         def test_parseXML_empty(self):
@@ -272,8 +271,8 @@ else:
     class Test_importPluginRegistry(_TestBase):
 
         def test_empty_default_purge(self):
-            from Products.PluginRegistry.exportimport \
-                import importPluginRegistry
+            from Products.PluginRegistry.exportimport import \
+                importPluginRegistry
 
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO,
@@ -294,8 +293,8 @@ else:
             self.assertRaises(KeyError, registry.listPlugins, IBar)
 
         def test_empty_explicit_purge(self):
-            from Products.PluginRegistry.exportimport \
-                import importPluginRegistry
+            from Products.PluginRegistry.exportimport import \
+                importPluginRegistry
 
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO,
@@ -316,8 +315,8 @@ else:
             self.assertRaises(KeyError, registry.listPlugins, IBar)
 
         def test_empty_skip_purge(self):
-            from Products.PluginRegistry.exportimport \
-                import importPluginRegistry
+            from Products.PluginRegistry.exportimport import \
+                importPluginRegistry
 
             app, registry = self._initRegistry(
                                     plugin_type_info=_PLUGIN_TYPE_INFO,
@@ -338,8 +337,8 @@ else:
             self.assertEqual(len(registry.listPlugins(IBar)), 0)
 
         def test_normal_no_plugins(self):
-            from Products.PluginRegistry.exportimport \
-                import importPluginRegistry
+            from Products.PluginRegistry.exportimport import \
+                importPluginRegistry
 
             app, registry = self._initRegistry(
                               plugins={IFoo: ('foo_plugin_1', 'foo_plugin_2')})
@@ -370,8 +369,8 @@ else:
             self.assertEqual(len(registry.listPlugins(IBar)), 0)
 
         def test_normal_with_plugins(self):
-            from Products.PluginRegistry.exportimport \
-                import importPluginRegistry
+            from Products.PluginRegistry.exportimport import \
+                importPluginRegistry
 
             app, registry = self._initRegistry(
                               plugins={IFoo: ('foo_plugin_1', 'foo_plugin_2')})
@@ -408,8 +407,8 @@ else:
 
         def test_normal_with_plugins_skip_duplicates(self):
             # See http://www.zope.org/Collectors/PAS/52
-            from Products.PluginRegistry.exportimport \
-                import importPluginRegistry
+            from Products.PluginRegistry.exportimport import \
+                importPluginRegistry
 
             app, registry = self._initRegistry()
 

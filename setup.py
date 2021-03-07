@@ -5,7 +5,7 @@ from setuptools import setup
 
 
 here = os.path.abspath(os.path.dirname(__file__))
-package = os.path.join(here, 'Products', 'PluginRegistry')
+package = os.path.join(here, 'src', 'Products', 'PluginRegistry')
 
 
 def _package_doc(name):
@@ -58,7 +58,8 @@ setup(
         'Sources': 'https://github.com/zopefoundation/Products.PluginRegistry',
     },
     license='ZPL 2.1',
-    packages=find_packages(),
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
     include_package_data=True,
     namespace_packages=['Products'],
     zip_safe=False,

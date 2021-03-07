@@ -4,6 +4,8 @@ Change Log
 1.9 (unreleased)
 ----------------
 
+- change package structure to move package code into a ``src`` subfolder
+
 
 1.8 (2019-10-12)
 ----------------

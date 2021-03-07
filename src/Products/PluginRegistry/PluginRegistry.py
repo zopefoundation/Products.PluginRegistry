@@ -34,8 +34,8 @@ from zope.interface import implementer
 
 
 try:
-    from Products.PluginRegistry.exportimport import _updatePluginRegistry
     from Products.PluginRegistry.exportimport import PluginRegistryExporter
+    from Products.PluginRegistry.exportimport import _updatePluginRegistry
 except ImportError:
     _HAS_GENERIC_SETUP = False
 else:
