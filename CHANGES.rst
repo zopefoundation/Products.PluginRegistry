@@ -4,6 +4,8 @@ Change Log
 1.9 (unreleased)
 ----------------
 
+- add support for Python 3.9
+
 - change package structure to move package code into a ``src`` subfolder
 
 

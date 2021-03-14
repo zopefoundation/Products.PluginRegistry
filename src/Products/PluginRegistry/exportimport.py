@@ -27,8 +27,9 @@ from Products.GenericSetup.utils import ImportConfiguratorBase
 from Products.GenericSetup.utils import _getDottedName
 from Products.GenericSetup.utils import _resolveDottedName
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.PluginRegistry.interfaces import IPluginRegistry
 from zope.interface import implementer
+
+from Products.PluginRegistry.interfaces import IPluginRegistry
 
 
 def _providedBy(obj, iface):

@@ -1,3 +1,17 @@
+.. image:: https://github.com/zopefoundation/Products.PluginRegistry/actions/workflows/tests.yml/badge.svg
+        :target: https://github.com/zopefoundation/Products.PluginRegistry/actions/workflows/tests.yml
+
+.. image:: https://coveralls.io/repos/github/zopefoundation/Products.PluginRegistry/badge.svg
+        :target: https://coveralls.io/github/zopefoundation/Products.PluginRegistry
+
+.. image:: https://img.shields.io/pypi/v/Products.PluginRegistry.svg
+        :target: https://pypi.org/project/Products.PluginRegistry/
+        :alt: Current version on PyPI
+
+.. image:: https://img.shields.io/pypi/pyversions/Products.PluginRegistry.svg
+        :target: https://pypi.org/project/Products.PluginRegistry/
+        :alt: Supported Python versions
+
 Products.PluginRegistry
 =======================
 

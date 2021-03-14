@@ -94,6 +94,7 @@ else:
         def _initRegistry(self, plugin_type_info=(), plugins={}):
             from OFS.Folder import Folder
             from OFS.SimpleItem import SimpleItem
+
             from Products.PluginRegistry.PluginRegistry import PluginRegistry
 
             app = Folder()
