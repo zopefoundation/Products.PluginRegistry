@@ -1,21 +1,8 @@
-import os
-
 from setuptools import find_packages
 from setuptools import setup
 
 
-here = os.path.abspath(os.path.dirname(__file__))
-package = os.path.join(here, 'src', 'Products', 'PluginRegistry')
-
-
-def _package_doc(name):
-    f = open(os.path.join(package, name))
-    return f.read()
-
-
 NAME = 'PluginRegistry'
-
-VERSION = _package_doc('version.txt').strip()
 
 with open('README.rst') as f:
     README = f.read()
@@ -25,7 +12,7 @@ with open('CHANGES.rst') as f:
 
 setup(
     name='Products.PluginRegistry',
-    version=VERSION,
+    version='1.9',
     description='Configure application plugins based on interfaces',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
