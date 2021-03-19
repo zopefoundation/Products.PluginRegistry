@@ -29,8 +29,9 @@ from OFS.interfaces import IWriteLock
 from OFS.SimpleItem import SimpleItem
 from Persistence import PersistentMapping
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.PluginRegistry.interfaces import IPluginRegistry
 from zope.interface import implementer
+
+from Products.PluginRegistry.interfaces import IPluginRegistry
 
 
 try:

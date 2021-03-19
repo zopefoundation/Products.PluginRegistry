@@ -59,13 +59,15 @@ class PluginRegistryTests(unittest.TestCase):
         return _PLUGIN_INFO, IFoo, IBar
 
     def test_class_conforms_to_IPluginRegistry(self):
-        from Products.PluginRegistry.interfaces import IPluginRegistry
         from zope.interface.verify import verifyClass
+
+        from Products.PluginRegistry.interfaces import IPluginRegistry
         verifyClass(IPluginRegistry, self._getTargetClass())
 
     def test_instance_conforms_to_IPluginRegistry(self):
-        from Products.PluginRegistry.interfaces import IPluginRegistry
         from zope.interface.verify import verifyObject
+
+        from Products.PluginRegistry.interfaces import IPluginRegistry
         verifyObject(IPluginRegistry, self._makeOne())
 
     def test_listPlugins_miss(self):
