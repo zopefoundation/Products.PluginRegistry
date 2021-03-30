@@ -37,7 +37,7 @@ deployment::
   eggs = Products.PluginRegistry
   ...
 
-The product can also be installed as a depencency of another distribution.
+The product can also be installed as a dependency of another distribution.
 
 To install this package manually, without using setuptools,
 untar the package file downloaded from the PyPI site and look for
