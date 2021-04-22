@@ -16,7 +16,7 @@ Products.PluginRegistry
 =======================
 
 Products.PluginRegistry offers a simple persistent registry which allows
-the site manager to registe components for specific interfaces, and
+the site manager to register components for specific interfaces, and
 to order them.
 
 Installation
