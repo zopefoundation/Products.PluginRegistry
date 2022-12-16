@@ -12,7 +12,7 @@ with open('CHANGES.rst') as f:
 
 setup(
     name='Products.PluginRegistry',
-    version='1.11.dev0',
+    version='1.11',
     description='Configure application plugins based on interfaces',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
@@ -33,6 +33,7 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: Implementation :: CPython',
         'Topic :: Software Development',
         'Topic :: System :: Archiving :: Packaging',
