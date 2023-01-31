@@ -56,25 +56,25 @@ else:
 <plugin-registry>
  <plugin-type
     id="IFoo"
-    interface="%s"
+    interface="{}"
     title="foo"
     description="Some plugin interface">
  </plugin-type>
  <plugin-type
     id="IBar"
-    interface="%s"
+    interface="{}"
     title="bar"
     description="Another plugin interface">
  </plugin-type>
 </plugin-registry>
-""" % (_getDottedName(IFoo), _getDottedName(IBar))
+""".format(_getDottedName(IFoo), _getDottedName(IBar))
 
     _NORMAL_PLUGINREGISTRY_EXPORT = """\
 <?xml version="1.0"?>
 <plugin-registry>
  <plugin-type
     id="IFoo"
-    interface="%s"
+    interface="{}"
     title="foo"
     description="Some plugin interface">
   <plugin id="foo_plugin_1" />
@@ -82,12 +82,12 @@ else:
  </plugin-type>
  <plugin-type
     id="IBar"
-    interface="%s"
+    interface="{}"
     title="bar"
     description="Another plugin interface">
  </plugin-type>
 </plugin-registry>
-""" % (_getDottedName(IFoo), _getDottedName(IBar))
+""".format(_getDottedName(IFoo), _getDottedName(IBar))
 
     class _TestBase(PlacelessSetup, BaseRegistryTests):
 
@@ -443,11 +443,12 @@ else:
             return result
 
     def test_suite():
+        loader = unittest.defaultTestLoader
         return unittest.TestSuite((
-            unittest.makeSuite(PluginRegistryExporterTests),
-            unittest.makeSuite(PluginRegistryImporterTests),
-            unittest.makeSuite(Test_exportPluginRegistry),
-            unittest.makeSuite(Test_importPluginRegistry)))
+            loader.loadTestsFromTestCase(PluginRegistryExporterTests),
+            loader.loadTestsFromTestCase(PluginRegistryImporterTests),
+            loader.loadTestsFromTestCase(Test_exportPluginRegistry),
+            loader.loadTestsFromTestCase(Test_importPluginRegistry)))
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

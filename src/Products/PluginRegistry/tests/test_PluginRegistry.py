@@ -443,5 +443,5 @@ class PluginRegistryTests(unittest.TestCase):
 
 def test_suite():
     return unittest.TestSuite((
-        unittest.makeSuite(PluginRegistryTests),
+        unittest.defaultTestLoader.loadTestsFromTestCase(PluginRegistryTests),
     ))
