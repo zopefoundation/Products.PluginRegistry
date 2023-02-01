@@ -449,4 +449,3 @@ else:
             loader.loadTestsFromTestCase(PluginRegistryImporterTests),
             loader.loadTestsFromTestCase(Test_exportPluginRegistry),
             loader.loadTestsFromTestCase(Test_importPluginRegistry)))
-
