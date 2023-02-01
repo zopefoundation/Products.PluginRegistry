@@ -12,7 +12,7 @@ with open('CHANGES.rst') as f:
 
 setup(
     name='Products.PluginRegistry',
-    version='1.12.dev0',
+    version='2.0.dev0',
     description='Configure application plugins based on interfaces',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
@@ -21,14 +21,10 @@ setup(
         'Framework :: Plone :: 5.2',
         'Framework :: Plone :: Core',
         'Framework :: Zope',
-        'Framework :: Zope :: 4',
         'Framework :: Zope :: 5',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Zope Public License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
@@ -41,7 +37,7 @@ setup(
     ],
     keywords='web application server zope zope2',
     author='Zope Foundation and Contributors',
-    author_email='zope-cmf@lists.zope.org',
+    author_email='zope-dev@zope.dev',
     url='https://github.com/zopefoundation/Products.PluginRegistry',
     project_urls={
         'Issue Tracker': ('https://github.com/zopefoundation/Products.'
@@ -54,10 +50,9 @@ setup(
     include_package_data=True,
     namespace_packages=['Products'],
     zip_safe=False,
-    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*',
+    python_requires='>=3.7',
     install_requires=[
         'setuptools',
-        'six',
         'Zope >= 4.0b4',
         'Products.GenericSetup >= 2.0b1',
     ],

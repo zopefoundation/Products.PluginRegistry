@@ -148,7 +148,7 @@ class PluginRegistryImporter(ImportConfiguratorBase):
 
 
 @implementer(IFilesystemExporter, IFilesystemImporter)
-class PluginRegistryFileExportImportAdapter(object):
+class PluginRegistryFileExportImportAdapter:
     """ Designed for ues when exporting / importing PR's within a container.
     """
 

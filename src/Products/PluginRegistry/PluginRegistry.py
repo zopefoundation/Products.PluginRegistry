@@ -16,8 +16,6 @@
 import logging
 import os
 
-import six
-
 from AccessControl import ClassSecurityInfo
 from AccessControl.class_init import default__class_init__ as InitializeClass
 from AccessControl.Permissions import manage_users as ManageUsers
@@ -65,7 +63,7 @@ class PluginRegistry(SimpleItem):
 
     def __init__(self, plugin_type_info=()):
 
-        if isinstance(plugin_type_info, six.string_types):
+        if isinstance(plugin_type_info, str):
             # some tool is passing us our ID.
             raise ValueError('Must pass a sequence of plugin info dicts!')
 
@@ -141,14 +139,14 @@ class PluginRegistry(SimpleItem):
         plugins = list(self._getPlugins(plugin_type))
 
         if plugin_id in plugins:
-            raise KeyError('Duplicate plugin id: {0}'.format(plugin_id))
+            raise KeyError(f'Duplicate plugin id: {plugin_id}')
 
         parent = aq_parent(aq_inner(self))
         plugin = parent._getOb(plugin_id)
 
         if not _satisfies(plugin, plugin_type):
             raise ValueError(
-                'Plugin does not implement {0}'.format(plugin_type))
+                f'Plugin does not implement {plugin_type}')
 
         plugins.append(plugin_id)
         self._plugins[plugin_type] = tuple(plugins)
@@ -161,7 +159,7 @@ class PluginRegistry(SimpleItem):
         plugins = list(self._getPlugins(plugin_type))
 
         if plugin_id not in plugins:
-            raise KeyError('Invalid plugin id: {0}'.format(plugin_id))
+            raise KeyError(f'Invalid plugin id: {plugin_id}')
 
         plugins = [x for x in plugins if x != plugin_id]
         self._plugins[plugin_type] = tuple(plugins)
@@ -386,7 +384,7 @@ class PluginRegistry(SimpleItem):
             raise KeyError(plugin_type_name)
 
         if len(found) > 1:
-            raise KeyError('Waaa!:  {0}'.format(plugin_type_name))
+            raise KeyError(f'Waaa!:  {plugin_type_name}')
 
         return found[0]
 
@@ -396,9 +394,6 @@ InitializeClass(PluginRegistry)
 
 def _satisfies(plugin, iface):
     checker = getattr(iface, 'providedBy', None)
-    if checker is None:  # BBB for Zope 2.7?
-        checker = iface.isImplementedBy
-
     return checker(plugin)
 
 
