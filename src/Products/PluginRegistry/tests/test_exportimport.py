@@ -450,5 +450,3 @@ else:
             loader.loadTestsFromTestCase(Test_exportPluginRegistry),
             loader.loadTestsFromTestCase(Test_importPluginRegistry)))
 
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')
