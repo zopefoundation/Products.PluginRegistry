@@ -35,7 +35,7 @@ from Products.PluginRegistry.interfaces import IPluginRegistry
 try:
     from Products.PluginRegistry.exportimport import PluginRegistryExporter
     from Products.PluginRegistry.exportimport import _updatePluginRegistry
-except ImportError:
+except ModuleNotFoundError:
     _HAS_GENERIC_SETUP = False
 else:
     _HAS_GENERIC_SETUP = True
@@ -50,7 +50,6 @@ logger = logging.getLogger('PluginRegistry')
 
 @implementer(IPluginRegistry, IWriteLock)
 class PluginRegistry(SimpleItem):
-
     """ Implement IPluginRegistry as an independent, ZMI-manageable object.
 
     o Each plugin type holds an ordered list of (id, wrapper) tuples.
@@ -71,16 +70,16 @@ class PluginRegistry(SimpleItem):
         self._plugin_type_info = PersistentMapping()
         for interface in plugin_type_info:
             self._plugin_type_info[interface[0]] = {
-                  'id': interface[1],
-                  'title': interface[2],
-                  'description': interface[3]}
+                'id': interface[1],
+                'title': interface[2],
+                'description': interface[3]
+            }
 
     #
     #   IPluginRegistry implementation
     #
     @security.protected(ManageUsers)
     def listPluginTypeInfo(self):
-
         """ See IPluginRegistry.
         """
         result = []
@@ -97,7 +96,6 @@ class PluginRegistry(SimpleItem):
 
     @security.protected(ManageUsers)
     def listPlugins(self, plugin_type):
-
         """ See IPluginRegistry.
         """
         result = []
@@ -117,7 +115,6 @@ class PluginRegistry(SimpleItem):
 
     @security.protected(ManageUsers)
     def getPluginInfo(self, plugin_type):
-
         """ See IPluginRegistry.
         """
         plugin_type = self._getInterfaceFromName(plugin_type)
@@ -125,7 +122,6 @@ class PluginRegistry(SimpleItem):
 
     @security.protected(ManageUsers)
     def listPluginIds(self, plugin_type):
-
         """ See IPluginRegistry.
         """
 
@@ -133,7 +129,6 @@ class PluginRegistry(SimpleItem):
 
     @security.protected(ManageUsers)
     def activatePlugin(self, plugin_type, plugin_id):
-
         """ See IPluginRegistry.
         """
         plugins = list(self._getPlugins(plugin_type))
@@ -145,15 +140,13 @@ class PluginRegistry(SimpleItem):
         plugin = parent._getOb(plugin_id)
 
         if not _satisfies(plugin, plugin_type):
-            raise ValueError(
-                f'Plugin does not implement {plugin_type}')
+            raise ValueError(f'Plugin does not implement {plugin_type}')
 
         plugins.append(plugin_id)
         self._plugins[plugin_type] = tuple(plugins)
 
     @security.protected(ManageUsers)
     def deactivatePlugin(self, plugin_type, plugin_id):
-
         """ See IPluginRegistry.
         """
         plugins = list(self._getPlugins(plugin_type))
@@ -166,7 +159,6 @@ class PluginRegistry(SimpleItem):
 
     @security.protected(ManageUsers)
     def movePluginsTop(self, plugin_type, ids_to_move):
-
         """ See IPluginRegistry.
         """
         ids = list(self._getPlugins(plugin_type))
@@ -178,7 +170,6 @@ class PluginRegistry(SimpleItem):
 
     @security.protected(ManageUsers)
     def movePluginsUp(self, plugin_type, ids_to_move):
-
         """ See IPluginRegistry.
         """
         ids = list(self._getPlugins(plugin_type))
@@ -203,7 +194,6 @@ class PluginRegistry(SimpleItem):
 
     @security.protected(ManageUsers)
     def movePluginsDown(self, plugin_type, ids_to_move):
-
         """ See IPluginRegistry.
         """
         ids = list(self._getPlugins(plugin_type))
@@ -278,7 +268,6 @@ class PluginRegistry(SimpleItem):
 
     @security.protected(ManageUsers)
     def getAllPlugins(self, plugin_type):
-
         """ Return a mapping segregating active / available plugins.
 
         'plugin_type' is the __name__ of the interface.
@@ -297,7 +286,6 @@ class PluginRegistry(SimpleItem):
 
     @security.protected(ManageUsers)
     def removePluginById(self, plugin_id):
-
         """ Remove a plugin from any plugin types which have it configured.
         """
         for plugin_type in self._plugin_types:
@@ -305,21 +293,28 @@ class PluginRegistry(SimpleItem):
             if plugin_id in self._getPlugins(plugin_type):
                 self.deactivatePlugin(plugin_type, plugin_id)
 
-    security.declareProtected(ManageUsers,  # noqa: D001
-                              'manage_plugins')
+    security.declareProtected(
+        ManageUsers,  # noqa: D001
+        'manage_plugins')
     manage_plugins = PageTemplateFile('plugins', _wwwdir)
-    security.declareProtected(ManageUsers,  # noqa: D001
-                              'manage_active')
+    security.declareProtected(
+        ManageUsers,  # noqa: D001
+        'manage_active')
     manage_active = PageTemplateFile('active_plugins', _wwwdir)
     manage_twoLists = PageTemplateFile('two_lists', _wwwdir)
 
-    manage_options = (({'label': 'Plugins', 'action': 'manage_plugins'},
-                       {'label': 'Active', 'action': 'manage_active'})
-                      + SimpleItem.manage_options)
+    manage_options = (({
+        'label': 'Plugins',
+        'action': 'manage_plugins'
+    }, {
+        'label': 'Active',
+        'action': 'manage_active'
+    }) + SimpleItem.manage_options)
 
     if _HAS_GENERIC_SETUP:
-        security.declareProtected(ManageUsers,  # noqa: D001
-                                  'manage_exportImportForm')
+        security.declareProtected(
+            ManageUsers,  # noqa: D001
+            'manage_exportImportForm')
         manage_exportImportForm = PageTemplateFile('export_import', _wwwdir)
 
         @security.protected(ManageUsers)
@@ -352,10 +347,11 @@ class PluginRegistry(SimpleItem):
             xml = REQUEST['BODYFILE'].read()
             _updatePluginRegistry(self, xml, True)
 
-        manage_options = (manage_options[:2]
-                          + ({'label': 'Export / Import',
-                              'action': 'manage_exportImportForm'},)
-                          + manage_options[2:])
+        manage_options = (manage_options[:2] +
+                          ({
+                              'label': 'Export / Import',
+                              'action': 'manage_exportImportForm'
+                          }, ) + manage_options[2:])
 
     #
     #   Helper methods
@@ -373,13 +369,14 @@ class PluginRegistry(SimpleItem):
 
     @security.private
     def _getInterfaceFromName(self, plugin_type_name):
-
         """ Convert the string name to an interface.
 
         o Raise KeyError if no such interface is known.
         """
-        found = [x[0] for x in self._plugin_type_info.items()
-                 if x[1]['id'] == plugin_type_name]
+        found = [
+            x[0] for x in self._plugin_type_info.items()
+            if x[1]['id'] == plugin_type_name
+        ]
         if not found:
             raise KeyError(plugin_type_name)
 
