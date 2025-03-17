@@ -137,7 +137,7 @@ class PluginRegistryTests(unittest.TestCase):
         plugin_info, IFoo, IBar = self._makePluginInfo()
         parent = DummyFolder()
         foo_plugin = DummyPlugin()
-        directlyProvides(foo_plugin,  (IFoo,))
+        directlyProvides(foo_plugin, (IFoo,))
         parent._setObject('foo_plugin', foo_plugin)
 
         preg = self._makeOne(plugin_info).__of__(parent)
@@ -159,7 +159,7 @@ class PluginRegistryTests(unittest.TestCase):
         plugin_info, IFoo, IBar = self._makePluginInfo()
         parent = DummyFolder()
         foo_plugin = DummyPlugin()
-        directlyProvides(foo_plugin,  (IFoo,))
+        directlyProvides(foo_plugin, (IFoo,))
         parent._setObject('foo_plugin', foo_plugin)
 
         preg = self._makeOne(plugin_info).__of__(parent)

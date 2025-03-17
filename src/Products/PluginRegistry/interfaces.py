@@ -21,7 +21,6 @@ class IPluginRegistry(Interface):
     """ Manage a set of plugin definitions, grouped by type.
     """
     def listPluginTypeInfo():
-
         """ Return a sequence of mappings describing our plugin types.
 
         o Keys for the mappings must include:
@@ -39,7 +38,6 @@ class IPluginRegistry(Interface):
         """
 
     def listPlugins(plugin_type):
-
         """ Return a sequence of tuples, one for each plugin of the given type.
 
         o 'plugin_type' must be one of the known types, else raise KeyError.
@@ -48,7 +46,6 @@ class IPluginRegistry(Interface):
         """
 
     def listPluginIds(plugin_type):
-
         """ Return a sequence of plugin ids
 
         o Return ids for each active plugin of the given type.
@@ -57,7 +54,6 @@ class IPluginRegistry(Interface):
         """
 
     def activatePlugin(plugin_type, plugin_id):
-
         """ Activate a plugin of the given type.
 
         o 'plugin_type' must be one of the known types, else raise KeyError.
@@ -70,7 +66,6 @@ class IPluginRegistry(Interface):
         """
 
     def deactivatePlugin(plugin_type, plugin_id):
-
         """ Deactivate a plugin of the given type.
 
         o 'plugin_type' must be one of the known types, else raise KeyError.
@@ -80,7 +75,6 @@ class IPluginRegistry(Interface):
         """
 
     def movePluginsUp(plugin_type, ids_to_move):
-
         """ Move a set of plugins "up" in their list.
 
         o 'plugin_type' must be one of the known types, else raise KeyError.
@@ -92,7 +86,6 @@ class IPluginRegistry(Interface):
         """
 
     def movePluginsTop(plugin_type, ids_to_move):
-
         """ Move a set of plugins to the "top" in their list.
 
         o 'plugin_type' must be one of the known types, else raise KeyError.
@@ -107,7 +100,6 @@ class IPluginRegistry(Interface):
         """
 
     def movePluginsDown(plugin_type, ids_to_move):
-
         """ Move a set of plugins "down" in their list.
 
         o 'plugin_type' must be one of the known types, else raise KeyError.
