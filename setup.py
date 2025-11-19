@@ -11,7 +11,7 @@ with open('CHANGES.rst') as f:
 
 setup(
     name='Products.PluginRegistry',
-    version='3.1.dev0',
+    version='3.1',
     description='Configure application plugins based on interfaces',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
@@ -49,6 +49,7 @@ setup(
         'Zope >= 4.0b4',
         'Products.GenericSetup >= 2.0b1',
     ],
+    include_package_data=True,
     entry_points="""
     [zope2.initialize]
     Products.PluginRegistry = Products.PluginRegistry:initialize
