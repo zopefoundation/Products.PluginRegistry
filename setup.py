@@ -11,7 +11,7 @@ with open('CHANGES.rst') as f:
 
 setup(
     name='Products.PluginRegistry',
-    version='3.0',
+    version='3.1.dev0',
     description='Configure application plugins based on interfaces',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
