@@ -4,6 +4,8 @@ Change Log
 3.1 (2025-11-19)
 ----------------
 
+- Move package metadata from setup.py to pyproject.toml.
+
 - Fix release to include package data files.
 
 
