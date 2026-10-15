@@ -29,7 +29,7 @@
            class="form-label col-sm-3 col-md-2">Configuration</label>
     <div class="col-sm-9 col-md-10">
       <textarea id="content" data-contenttype="xml"
-                class="form-control zmi-zpt zmi-code col-sm-12" 
+                class="form-control zmi-zpt zmi-code col-sm-12"
                 name="xml:text" wrap="off" rows="20" data-readonly="false"
                 tal:content="context/getConfigAsXML"></textarea>
     </div>
@@ -45,4 +45,3 @@
 </main>
 
 <h1 tal:replace="structure here/manage_page_footer"> PAGE FOOTER </h1>
-
