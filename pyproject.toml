@@ -10,7 +10,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Products.PluginRegistry"
-version = "3.1"
+version = "3.2"
 description = "Configure application plugins based on interfaces"
 license = "ZPL-2.1"
 classifiers = [
