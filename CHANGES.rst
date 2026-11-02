@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-3.1 (2025-11-19)
+3.1 (unreleased)
 ----------------
 
 - Add support for Python 3.15.
@@ -9,6 +9,10 @@ Change Log
 - Drop support for Python 3.10.
 
 - Move package metadata from setup.py to pyproject.toml.
+
+
+3.1 (2025-11-19)
+----------------
 
 - Fix release to include package data files.
 
