@@ -2,15 +2,14 @@
 # https://github.com/zopefoundation/meta/tree/master/src/zope/meta/zope-product
 [build-system]
 requires = [
-    "setuptools >= 78.1.1,< 81",
+    "setuptools >= 78.1.1,< 82",
     "wheel",
 ]
 build-backend = "setuptools.build_meta"
 
-
 [project]
 name = "Products.PluginRegistry"
-version = "3.1"
+version = "3.2"
 description = "Configure application plugins based on interfaces"
 license = "ZPL-2.1"
 classifiers = [
@@ -22,18 +21,18 @@ classifiers = [
     "Framework :: Zope :: 5",
     "Intended Audience :: Developers",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "Programming Language :: Python :: Implementation :: CPython",
     "Topic :: Software Development",
     "Topic :: System :: Archiving :: Packaging",
     "Topic :: Software Development :: Libraries :: Application Frameworks",
 ]
 dynamic = ["readme"]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 authors = [
     {name = "Zope Foundation and contributors",email = "zope-dev@zope.dev"},
 ]
@@ -81,4 +80,3 @@ directory = "parts/htmlcov"
 
 [tool.setuptools.dynamic]
 readme = {file = ["README.rst", "CHANGES.rst"]}
-
